@@ -122,21 +122,29 @@ describe('game reducer', () => {
       }
     };
 
-    const unmockable = Math;
-    const mock = Object.create(Math);
-    let counter = 0;
-    const values = [.5,.1,.7,.0,.9];
-    mock.random = () => values[counter++ % values.length];
-    Math = mock;
+    let unmockable;
+
+    beforeEach(() => {
+      unmockable = Math;
+      const mock = Object.create(Math);
+      let counter = 0;
+      const values = [.5,.1,.7,.0,.9];
+      mock.random = () => values[counter++ % values.length];
+      Math = mock; // eslint-disable-line no-native-reassign
+    });
 
     it('by user', () => {
       const newState = reducer(state, actions.shuffleByUser());
-      expect(newState.ai.letters).toEqual(['s', 't', 'a', 'e', 't']);
+      expect(newState.ai.letters).toEqual(['t', 's', 'a', 't', 'e']);
     });
 
     it('by ai', () => {
       const newState = reducer(state, actions.shuffleByAI());
       expect(newState.user.letters).toEqual(['t', 's', 'u', 't', 'e']);
+    });
+
+    afterEach(() => {
+      Math = unmockable; // eslint-disable-line no-native-reassign
     });
   });
 });
