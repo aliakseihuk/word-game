@@ -1,0 +1,12 @@
+export const SET_WORD = 'SET_WORD';
+
+export const CHECK_WORD_BY_USER = 'CHECK_WORD_BY_USER';
+export const CHECK_LETTER_BY_USER = 'CHECK_LETTER_BY_USER';
+export const SHUFFLE_BY_USER = 'SHUFFLE_BY_USER';
+
+export const ACTIVATE_AI_STEP = 'ACTIVATE_AI_STEP';
+export const CHECK_WORD_BY_AI = 'CHECK_WORD_BY_AI';
+export const CHECK_LETTER_BY_AI = 'CHECK_LETTER_BY_AI';
+export const SHUFFLE_BY_AI = 'SHUFFLE_BY_AI';
+
+
