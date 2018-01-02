@@ -6,7 +6,7 @@ import Start from './components/Start';
 import Game from './components/Game';
 import Finish from './components/Finish';
 
-class App extends Component {
+export class App extends Component {
   render() {
     const frame =
       this.props.mode === 'start' ? (
