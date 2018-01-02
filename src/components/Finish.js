@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 class Finish extends Component {
   constructor(props) {
-
-    super(props)
+    super(props);
 
     this.state = {
       userWin: this.props.userWin
@@ -11,12 +10,7 @@ class Finish extends Component {
   }
 
   render() {
-    return (
-
-      <div>
-        you win
-      </div>
-    );
+    return <div>you win</div>;
   }
 }
 

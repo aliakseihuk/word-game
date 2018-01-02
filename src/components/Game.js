@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  checkLetterByUser,
-  checkWordByUser,
-  shuffleByUser
-} from '../actions';
+import { checkLetterByUser, checkWordByUser, shuffleByUser } from '../actions';
 
 class Game extends Component {
   constructor(props) {
-
-    super(props)
+    super(props);
 
     this.state = { letter: '', word: '' };
     this.handleLetterChange = this.handleLetterChange.bind(this);
@@ -21,8 +16,9 @@ class Game extends Component {
 
   handleLetterChange(event) {
     const length = event.target.value.length;
-    const letter = length >=2 ? event.target.value[length - 1] : event.target.value;
-    this.setState({letter});
+    const letter =
+      length >= 2 ? event.target.value[length - 1] : event.target.value;
+    this.setState({ letter });
   }
 
   onLetterSubmit() {
@@ -30,7 +26,7 @@ class Game extends Component {
   }
 
   handleWordChange(event) {
-    this.setState({word: event.target.value});
+    this.setState({ word: event.target.value });
   }
 
   onWordSubmit() {
@@ -48,16 +44,24 @@ class Game extends Component {
         <p>User: {this.props.ai.letters}</p>
         <p>Opponent Word: {this.props.ai.word}</p>
         <p>Opponent: {this.props.user.letters}</p>
-        
+
         <label>
           Letter:
-          <input type="text" value={this.state.letter} onChange={this.handleLetterChange} />
-          <input type="submit" onClick={this.onLetterSubmit}/>
+          <input
+            type="text"
+            value={this.state.letter}
+            onChange={this.handleLetterChange}
+          />
+          <input type="submit" onClick={this.onLetterSubmit} />
         </label>
         <label>
           Word:
-          <input type="text" value={this.state.word} onChange={this.handleWordChange} />
-          <input type="submit" onClick={this.onWordSubmit}/>
+          <input
+            type="text"
+            value={this.state.word}
+            onChange={this.handleWordChange}
+          />
+          <input type="submit" onClick={this.onWordSubmit} />
         </label>
         <button onClick={this.onShuffle}>Shuffle</button>
       </div>
@@ -65,16 +69,16 @@ class Game extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { 
+const mapStateToProps = state => {
+  return {
     user: state.game.user,
     ai: state.game.ai
   };
 };
-const mapDispatchToProps = (dispatch) => { 
+const mapDispatchToProps = dispatch => {
   return {
-    checkLetterByUser: (letter) => dispatch(checkLetterByUser(letter)),
-    checkWordByUser: (word) => dispatch(checkWordByUser(word)),
+    checkLetterByUser: letter => dispatch(checkLetterByUser(letter)),
+    checkWordByUser: word => dispatch(checkWordByUser(word)),
     shuffleByUser: () => dispatch(shuffleByUser())
   };
 };

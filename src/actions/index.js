@@ -1,45 +1,49 @@
 import * as types from './types';
 
-const setWord = (word) => {
+const setWord = word => {
   return {
     type: types.SET_WORD,
     word
   };
-}
+};
 
-const checkLetterByUser = (letter) => {
+const checkLetterByUser = letter => {
   return {
     type: types.CHECK_LETTER_BY_USER,
     letter
   };
-}
+};
 
-const checkWordByUser = (word) => {
+const checkWordByUser = word => {
   return {
     type: types.CHECK_WORD_BY_USER,
     word
   };
-}
+};
 
-const shuffleByUser = () => { return { type: types.SHUFFLE_BY_USER }; }
+const shuffleByUser = () => {
+  return { type: types.SHUFFLE_BY_USER };
+};
 
 // const activateAIStep = () => { return {type: types.ACTIVATE_AI_STEP}; }
 
-const checkLetterByAI = (letter) => {
+const checkLetterByAI = letter => {
   return {
     type: types.CHECK_LETTER_BY_AI,
     letter
   };
-}
+};
 
-const checkWordByAI = (word) => {
+const checkWordByAI = word => {
   return {
     type: types.CHECK_WORD_BY_AI,
     word
   };
 };
 
-const shuffleByAI = () => { return { type: types.SHUFFLE_BY_AI }; }
+const shuffleByAI = () => {
+  return { type: types.SHUFFLE_BY_AI };
+};
 
 export {
   setWord,
@@ -48,5 +52,5 @@ export {
   shuffleByUser,
   checkLetterByAI,
   checkWordByAI,
-  shuffleByAI,
-}
+  shuffleByAI
+};

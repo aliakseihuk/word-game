@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { setWord } from '../actions'
+import { setWord } from '../actions';
 
 class Start extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = { inputValue: '' };
 
@@ -14,7 +14,7 @@ class Start extends Component {
   }
 
   handleChange(event) {
-    this.setState({inputValue: event.target.value});
+    this.setState({ inputValue: event.target.value });
   }
 
   handleSubmit(event) {
@@ -27,7 +27,11 @@ class Start extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Word:
-          <input type="text" value={this.state.inputValue} onChange={this.handleChange} />
+          <input
+            type="text"
+            value={this.state.inputValue}
+            onChange={this.handleChange}
+          />
           <input type="submit" value="Submit" />
         </label>
       </form>
@@ -35,11 +39,13 @@ class Start extends Component {
   }
 }
 
-const mapStateToProps = (state) => { return {} };
-const mapDispatchToProps = (dispatch) => { 
+const mapStateToProps = state => {
+  return {};
+};
+const mapDispatchToProps = dispatch => {
   return {
-    setWord: (word) => dispatch(setWord(word))
-  }
+    setWord: word => dispatch(setWord(word))
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Start);
