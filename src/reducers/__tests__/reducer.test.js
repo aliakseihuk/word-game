@@ -8,7 +8,7 @@ describe('game reducer', () => {
   });
 
   it('should set word', () => {
-    const word = 'test';
+    const word = 'TEST';
     const state = reducer(undefined, actions.setWord(word));
     expect(state.user).toEqual({ word, letters: [] });
   });
@@ -16,12 +16,12 @@ describe('game reducer', () => {
   describe('should check letters', () => {
     const state = {
       user: {
-        word: 'testu',
-        letters: ['e']
+        word: 'TESTU',
+        letters: ['E']
       },
       ai: {
-        word: 'testa',
-        letters: ['e']
+        word: 'TESTA',
+        letters: ['E']
       }
     };
 
@@ -33,18 +33,18 @@ describe('game reducer', () => {
         return reducer(state, action);
       };
 
-      newState = getState('u');
+      newState = getState('U');
       expect(newState).toEqual({ ...state });
 
-      newState = getState('e');
+      newState = getState('E');
       expect(newState).toEqual({ ...state });
 
-      newState = getState('a');
-      expectedai = { ...state.ai, letters: [...state.ai.letters, 'a'] };
+      newState = getState('A');
+      expectedai = { ...state.ai, letters: [...state.ai.letters, 'A'] };
       expect(newState).toEqual({ ...state, ai: expectedai });
 
-      newState = getState('t');
-      expectedai = { ...state.ai, letters: [...state.ai.letters, 't', 't'] };
+      newState = getState('T');
+      expectedai = { ...state.ai, letters: [...state.ai.letters, 'T', 'T'] };
       expect(newState).toEqual({ ...state, ai: expectedai });
     });
 
@@ -64,13 +64,13 @@ describe('game reducer', () => {
       expect(newState).toEqual({ ...state });
 
       newState = getState('u');
-      expecteduser = { ...state.user, letters: [...state.ai.letters, 'u'] };
+      expecteduser = { ...state.user, letters: [...state.ai.letters, 'U'] };
       expect(newState).toEqual({ ...state, user: expecteduser });
 
       newState = getState('t');
       expecteduser = {
         ...state.user,
-        letters: [...state.ai.letters, 't', 't']
+        letters: [...state.ai.letters, 'T', 'T']
       };
       expect(newState).toEqual({ ...state, user: expecteduser });
     });
@@ -79,43 +79,43 @@ describe('game reducer', () => {
   describe('should check words', () => {
     const state = {
       user: {
-        word: 'testu'
+        word: 'TESTU'
       },
       ai: {
-        word: 'testa'
+        word: 'TESTA'
       }
     };
 
     it('correct by user', () => {
-      const newState = reducer(state, actions.checkWordByUser('testa'));
+      const newState = reducer(state, actions.checkWordByUser('TESTA'));
       expect(newState.user.win).toEqual(true);
     });
 
     it('invalid by user', () => {
-      const newState = reducer(state, actions.checkWordByUser('testa'));
-      expect(newState.user.win).toEqual(true);
+      const newState = reducer(state, actions.checkWordByUser('TESTU'));
+      expect(newState.user.win).toEqual(false);
     });
 
     it('correct by ai', () => {
-      const newState = reducer(state, actions.checkWordByAI('test'));
-      expect(newState.ai.win).toEqual(false);
+      const newState = reducer(state, actions.checkWordByAI('TESTU'));
+      expect(newState.ai.win).toEqual(true);
     });
 
     it('invalid by ai', () => {
-      const newState = reducer(state, actions.checkWordByUser('test'));
-      expect(newState.user.win).toEqual(false);
+      const newState = reducer(state, actions.checkWordByAI('TESTA'));
+      expect(newState.ai.win).toEqual(false);
     });
   });
 
   describe('should shuffle', () => {
     const state = {
       user: {
-        word: 'testu',
-        letters: ['t', 't', 'e', 's', 'u']
+        word: 'TESTU',
+        letters: ['T', 'T', 'E', 'S', 'U']
       },
       ai: {
-        word: 'testa',
-        letters: ['t', 't', 'e', 's', 'a']
+        word: 'TESTA',
+        letters: ['T', 'T', 'E', 'S', 'A']
       }
     };
 
@@ -132,12 +132,12 @@ describe('game reducer', () => {
 
     it('by user', () => {
       const newState = reducer(state, actions.shuffleByUser());
-      expect(newState.ai.letters).toEqual(['t', 's', 'a', 't', 'e']);
+      expect(newState.ai.letters).toEqual(['T', 'T', 'E', 'S', 'A']);
     });
 
     it('by ai', () => {
       const newState = reducer(state, actions.shuffleByAI());
-      expect(newState.user.letters).toEqual(['t', 's', 'u', 't', 'e']);
+      expect(newState.user.letters).toEqual(['T', 'S', 'U', 'T', 'E']);
     });
 
     afterEach(() => {
