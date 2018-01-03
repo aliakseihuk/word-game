@@ -22,10 +22,17 @@ const checkWordByUser = word => {
 };
 
 const shuffleByUser = () => {
-  return { type: types.SHUFFLE_BY_USER };
+  return dispatch => {
+    dispatch({ type: types.SHUFFLE_BY_USER });
+    dispatch(activateAIStep());
+  };
 };
 
-// const activateAIStep = () => { return {type: types.ACTIVATE_AI_STEP}; }
+const activateAIStep = () => {
+  return dispatch => {
+    dispatch({ type: types.ACTIVATE_AI_STEP });
+  };
+};
 
 const checkLetterByAI = letter => {
   return {

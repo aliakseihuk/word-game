@@ -1,7 +1,15 @@
 import * as types from '../actions/types';
+import { checkLetter, shuffle } from './reducer.helper';
 
 const initialState = {
-  vocabulary: ['hello', 'dayly'],
+  vocabulary: {
+    language: 'en',
+    alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    dictionary: [
+      // make as set object
+      'HELLO'
+    ]
+  },
   user: {
     word: '',
     letters: [],
@@ -18,22 +26,26 @@ const initialState = {
 export function game(state = initialState, action) {
   switch (action.type) {
     case types.SET_WORD: {
-      const user = { word: action.word, letters: [] };
+      const user = { word: action.word.toUpperCase(), letters: [] };
 
-      const wIndex = Math.floor(Math.random() * state.vocabulary.length);
-      const aiWord = state.vocabulary[wIndex];
+      const wIndex = Math.floor(
+        Math.random() * state.vocabulary.dictionary.length
+      );
+      const aiWord = state.vocabulary.dictionary[wIndex];
       const ai = { word: aiWord, letters: [] };
 
       return { ...state, user, ai, mode: 'game' };
     }
 
     case types.CHECK_LETTER_BY_USER: {
-      const stats = checkLetter(state.ai, action.letter);
+      const letter = action.letter.toUpperCase();
+      const stats = checkLetter(state.ai, letter);
       return { ...state, ai: stats };
     }
 
     case types.CHECK_LETTER_BY_AI: {
-      const stats = checkLetter(state.user, action.letter);
+      const letter = action.letter.toUpperCase();
+      const stats = checkLetter(state.user, letter);
       return { ...state, user: stats };
     }
 
@@ -48,40 +60,39 @@ export function game(state = initialState, action) {
     }
 
     case types.CHECK_WORD_BY_USER: {
-      const win = state.ai.word === action.word;
+      const word = action.word.toUpperCase();
+      const win = state.ai.word === word;
       const mode = win ? 'end' : state.mode;
       return { ...state, user: { ...state.user, win }, mode };
     }
 
     case types.CHECK_WORD_BY_AI: {
-      const win = state.user.word === action.word;
+      const word = action.word.toUpperCase();
+      const win = state.user.word === word;
       const mode = win ? 'end' : state.mode;
       return { ...state, ai: { ...state.ai, win }, mode };
     }
+
+    case types.ACTIVATE_AI_STEP: {
+      // todo: check if ai win after each ai action not
+      if (state.user.word === state.user.letters.reduce((p, c) => p + c, ''))
+        return { ...state, ai: { ...state.ai, win: true }, mode: 'end' };
+
+      if (state.user.letters.length === state.user.word.length) {
+        // shuffle letters if ai can't find
+        const ls = shuffle(state.user.letters);
+        return { ...state, user: { ...state.user, letters: ls } };
+      } else {
+        const alphabet = state.vocabulary.alphabet;
+        const letter = alphabet.charAt(
+          Math.floor(Math.random() * alphabet.length)
+        );
+        const stats = checkLetter(state.user, letter);
+        return { ...state, user: stats };
+      }
+    }
+
     default:
       return state;
   }
 }
-
-// todo: rename stats
-const checkLetter = (stats, letter) => {
-  const letters = [...stats.letters];
-  if (letters.every(l => l !== letter)) {
-    // check is it a new letter
-    for (const l of stats.word) {
-      if (l === letter) {
-        letters.push(letter);
-      }
-    }
-  }
-  return { ...stats, letters };
-};
-
-const shuffle = letters => {
-  const ls = [...letters];
-  for (let i = ls.length - 1; i > 0; --i) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [ls[i], ls[j]] = [ls[j], ls[i]];
-  }
-  return ls;
-};

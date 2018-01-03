@@ -1,5 +1,7 @@
 import * as actions from '../../actions';
+import * as types from '../../actions/types';
 import { game as reducer } from '../game';
+import * as reducerHelper from '../reducer.helper';
 
 describe('game reducer', () => {
   it('should return initial state', () => {
@@ -11,6 +13,7 @@ describe('game reducer', () => {
     const word = 'TEST';
     const state = reducer(undefined, actions.setWord(word));
     expect(state.user).toEqual({ word, letters: [] });
+    expect(state.mode).toEqual('game');
   });
 
   describe('should check letters', () => {
@@ -89,21 +92,7 @@ describe('game reducer', () => {
     it('correct by user', () => {
       const newState = reducer(state, actions.checkWordByUser('TESTA'));
       expect(newState.user.win).toEqual(true);
-    });
-
-    it('invalid by user', () => {
-      const newState = reducer(state, actions.checkWordByUser('TESTU'));
-      expect(newState.user.win).toEqual(false);
-    });
-
-    it('correct by ai', () => {
-      const newState = reducer(state, actions.checkWordByAI('TESTU'));
-      expect(newState.ai.win).toEqual(true);
-    });
-
-    it('invalid by ai', () => {
-      const newState = reducer(state, actions.checkWordByAI('TESTA'));
-      expect(newState.ai.win).toEqual(false);
+      expect(newState.mode).toEqual('end');
     });
   });
 
@@ -131,17 +120,65 @@ describe('game reducer', () => {
     });
 
     it('by user', () => {
-      const newState = reducer(state, actions.shuffleByUser());
-      expect(newState.ai.letters).toEqual(['T', 'T', 'E', 'S', 'A']);
-    });
-
-    it('by ai', () => {
-      const newState = reducer(state, actions.shuffleByAI());
-      expect(newState.user.letters).toEqual(['T', 'S', 'U', 'T', 'E']);
+      const newState = reducer(state, { type: types.SHUFFLE_BY_USER });
+      expect(newState.ai.letters).toEqual(['T', 'S', 'A', 'T', 'E']);
     });
 
     afterEach(() => {
       Math = unmockable; // eslint-disable-line no-native-reassign
+    });
+  });
+
+  describe('should automate ai step', () => {
+    it("check letter if ai doesn't know all letters", () => {
+      const state = {
+        vocabulary: {
+          alphabet: 'ABC'
+        },
+        user: {
+          word: 'TESTU',
+          letters: ['T', 'T', 'E', 'S']
+        }
+      };
+
+      reducerHelper.checkLetter = jest.fn();
+      reducer(state, { type: types.ACTIVATE_AI_STEP });
+      expect(reducerHelper.checkLetter).toBeCalled();
+    });
+
+    it("shuffle if ai don't recognize word", () => {
+      const state = {
+        vocabulary: {
+          alphabet: 'ABC'
+        },
+        user: {
+          word: 'TESTU',
+          letters: ['T', 'T', 'E', 'S', 'U']
+        }
+      };
+
+      reducerHelper.shuffle = jest.fn();
+      reducer(state, { type: types.ACTIVATE_AI_STEP });
+      expect(reducerHelper.shuffle).toBeCalled();
+    });
+
+    it('win if ai recognizes word', () => {
+      const state = {
+        vocabulary: {
+          alphabet: 'ABC'
+        },
+        user: {
+          word: 'TESTU',
+          letters: ['T', 'E', 'S', 'T', 'U']
+        },
+        ai: {
+          win: false
+        }
+      };
+
+      const newState = reducer(state, { type: types.ACTIVATE_AI_STEP });
+      expect(newState.ai.win).toEqual(true);
+      expect(newState.mode).toEqual('end');
     });
   });
 });
