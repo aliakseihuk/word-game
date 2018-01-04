@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { checkLetterByUser, checkWordByUser, shuffleByUser } from '../actions';
+import { checkLetter, checkWord, shuffle } from '../actions';
 import Letter from './Letter';
 
 class Game extends Component {
@@ -23,7 +23,7 @@ class Game extends Component {
   }
 
   onLetterSubmit() {
-    this.props.checkLetterByUser(this.state.letter);
+    this.props.checkLetter(this.state.letter);
   }
 
   handleWordChange(event) {
@@ -31,11 +31,11 @@ class Game extends Component {
   }
 
   onWordSubmit() {
-    this.props.checkWordByUser(this.state.word);
+    this.props.checkWord(this.state.word);
   }
 
   onShuffle() {
-    this.props.shuffleByUser();
+    this.props.shuffle();
   }
 
   render() {
@@ -82,9 +82,9 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    checkLetterByUser: letter => dispatch(checkLetterByUser(letter)),
-    checkWordByUser: word => dispatch(checkWordByUser(word)),
-    shuffleByUser: () => dispatch(shuffleByUser())
+    checkLetter: letter => dispatch(checkLetter(letter)),
+    checkWord: word => dispatch(checkWord(word)),
+    shuffle: () => dispatch(shuffle())
   };
 };
 

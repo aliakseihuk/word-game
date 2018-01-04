@@ -33,7 +33,7 @@ describe('game reducer', () => {
       let newState;
       let expectedai;
       const getState = letter => {
-        const action = actions.checkLetterByUser(letter);
+        const action = actions.checkLetter(letter);
         return reducer(state, action);
       };
 
@@ -51,33 +51,6 @@ describe('game reducer', () => {
       expectedai = { ...state.ai, letters: [...state.ai.letters, 'T', 'T'] };
       expect(newState).toEqual({ ...state, ai: expectedai });
     });
-
-    it('by ai', () => {
-      let newState;
-      let expecteduser;
-
-      const getState = letter => {
-        const action = actions.checkLetterByAI(letter);
-        return reducer(state, action);
-      };
-
-      newState = getState('a');
-      expect(newState).toEqual({ ...state });
-
-      newState = getState('e');
-      expect(newState).toEqual({ ...state });
-
-      newState = getState('u');
-      expecteduser = { ...state.user, letters: [...state.ai.letters, 'U'] };
-      expect(newState).toEqual({ ...state, user: expecteduser });
-
-      newState = getState('t');
-      expecteduser = {
-        ...state.user,
-        letters: [...state.ai.letters, 'T', 'T']
-      };
-      expect(newState).toEqual({ ...state, user: expecteduser });
-    });
   });
 
   describe('should check words', () => {
@@ -91,7 +64,7 @@ describe('game reducer', () => {
     };
 
     it('correct by user', () => {
-      const newState = reducer(state, actions.checkWordByUser('TESTA'));
+      const newState = reducer(state, actions.checkWord('TESTA'));
       expect(newState.user.win).toEqual(true);
       expect(newState.mode).toEqual(contstants.END);
     });
@@ -121,7 +94,7 @@ describe('game reducer', () => {
     });
 
     it('by user', () => {
-      const newState = reducer(state, { type: types.SHUFFLE_BY_USER });
+      const newState = reducer(state, { type: types.SHUFFLE });
       expect(newState.ai.letters).toEqual(['T', 'S', 'A', 'T', 'E']);
     });
 

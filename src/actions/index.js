@@ -7,23 +7,23 @@ const setWord = word => {
   };
 };
 
-const checkLetterByUser = letter => {
+const checkLetter = letter => {
   return {
-    type: types.CHECK_LETTER_BY_USER,
+    type: types.CHECK_LETTER,
     letter
   };
 };
 
-const checkWordByUser = word => {
+const checkWord = word => {
   return {
-    type: types.CHECK_WORD_BY_USER,
+    type: types.CHECK_WORD,
     word
   };
 };
 
-const shuffleByUser = () => {
+const shuffle = () => {
   return dispatch => {
-    dispatch({ type: types.SHUFFLE_BY_USER });
+    dispatch({ type: types.SHUFFLE });
     dispatch(activateAIStep());
   };
 };
@@ -34,30 +34,4 @@ const activateAIStep = () => {
   };
 };
 
-const checkLetterByAI = letter => {
-  return {
-    type: types.CHECK_LETTER_BY_AI,
-    letter
-  };
-};
-
-const checkWordByAI = word => {
-  return {
-    type: types.CHECK_WORD_BY_AI,
-    word
-  };
-};
-
-const shuffleByAI = () => {
-  return { type: types.SHUFFLE_BY_AI };
-};
-
-export {
-  setWord,
-  checkLetterByUser,
-  checkWordByUser,
-  shuffleByUser,
-  checkLetterByAI,
-  checkWordByAI,
-  shuffleByAI
-};
+export { setWord, checkLetter, checkWord, shuffle };

@@ -38,40 +38,22 @@ export function game(state = initialState, action) {
       return { ...state, user, ai, mode: constants.GAME };
     }
 
-    case types.CHECK_LETTER_BY_USER: {
+    case types.CHECK_LETTER: {
       const letter = action.letter.toUpperCase();
       const stats = checkLetter(state.ai, letter);
       return { ...state, ai: stats };
     }
 
-    case types.CHECK_LETTER_BY_AI: {
-      const letter = action.letter.toUpperCase();
-      const stats = checkLetter(state.user, letter);
-      return { ...state, user: stats };
-    }
-
-    case types.SHUFFLE_BY_USER: {
+    case types.SHUFFLE: {
       const ls = shuffle(state.ai.letters);
       return { ...state, ai: { ...state.ai, letters: ls } };
     }
 
-    case types.SHUFFLE_BY_AI: {
-      const ls = shuffle(state.user.letters);
-      return { ...state, user: { ...state.user, letters: ls } };
-    }
-
-    case types.CHECK_WORD_BY_USER: {
+    case types.CHECK_WORD: {
       const word = action.word.toUpperCase();
       const win = state.ai.word === word;
       const mode = win ? constants.END : state.mode;
       return { ...state, user: { ...state.user, win }, mode };
-    }
-
-    case types.CHECK_WORD_BY_AI: {
-      const word = action.word.toUpperCase();
-      const win = state.user.word === word;
-      const mode = win ? constants.END : state.mode;
-      return { ...state, ai: { ...state.ai, win }, mode };
     }
 
     case types.ACTIVATE_AI_STEP: {
