@@ -18,7 +18,7 @@ const checkWord = word => {
 
 const shuffle = () => {
   return dispatch => {
-    dispatch(actions.shuffle);
+    dispatch(actions.shuffle());
     dispatch(actions.activateAIStep());
   };
 };
