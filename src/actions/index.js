@@ -1,36 +1,25 @@
-import * as types from './types';
+import * as actions from './actions';
 
-const setWord = word => {
-  return {
-    type: types.SET_WORD,
-    word
-  };
-};
+const setWord = actions.setWord;
 
 const checkLetter = letter => {
-  return {
-    type: types.CHECK_LETTER,
-    letter
+  return dispatch => {
+    dispatch(actions.checkLetter(letter));
+    dispatch(actions.activateAIStep());
   };
 };
 
 const checkWord = word => {
-  return {
-    type: types.CHECK_WORD,
-    word
+  return dispatch => {
+    dispatch(actions.checkWord(word));
+    dispatch(actions.activateAIStep());
   };
 };
 
 const shuffle = () => {
   return dispatch => {
-    dispatch({ type: types.SHUFFLE });
-    dispatch(activateAIStep());
-  };
-};
-
-const activateAIStep = () => {
-  return dispatch => {
-    dispatch({ type: types.ACTIVATE_AI_STEP });
+    dispatch(actions.shuffle);
+    dispatch(actions.activateAIStep());
   };
 };
 

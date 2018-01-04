@@ -1,4 +1,4 @@
-import * as actions from '../../actions';
+import * as actions from '../../actions/actions';
 import * as types from '../../actions/types';
 import { game as reducer } from '../game';
 import * as reducerHelper from '../reducer.helper';
