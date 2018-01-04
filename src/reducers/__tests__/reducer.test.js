@@ -2,6 +2,7 @@ import * as actions from '../../actions';
 import * as types from '../../actions/types';
 import { game as reducer } from '../game';
 import * as reducerHelper from '../reducer.helper';
+import * as contstants from '../../constants';
 
 describe('game reducer', () => {
   it('should return initial state', () => {
@@ -13,7 +14,7 @@ describe('game reducer', () => {
     const word = 'TEST';
     const state = reducer(undefined, actions.setWord(word));
     expect(state.user).toEqual({ word, letters: [] });
-    expect(state.mode).toEqual('game');
+    expect(state.mode).toEqual(contstants.GAME);
   });
 
   describe('should check letters', () => {
@@ -92,7 +93,7 @@ describe('game reducer', () => {
     it('correct by user', () => {
       const newState = reducer(state, actions.checkWordByUser('TESTA'));
       expect(newState.user.win).toEqual(true);
-      expect(newState.mode).toEqual('end');
+      expect(newState.mode).toEqual(contstants.END);
     });
   });
 
@@ -178,7 +179,7 @@ describe('game reducer', () => {
 
       const newState = reducer(state, { type: types.ACTIVATE_AI_STEP });
       expect(newState.ai.win).toEqual(true);
-      expect(newState.mode).toEqual('end');
+      expect(newState.mode).toEqual(contstants.END);
     });
   });
 });

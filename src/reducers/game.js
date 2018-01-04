@@ -1,5 +1,6 @@
 import * as types from '../actions/types';
 import { checkLetter, shuffle } from './reducer.helper';
+import * as constants from '../constants';
 
 const initialState = {
   vocabulary: {
@@ -20,7 +21,7 @@ const initialState = {
     letters: [],
     win: false
   },
-  mode: 'start'
+  mode: constants.START
 };
 
 export function game(state = initialState, action) {
@@ -34,7 +35,7 @@ export function game(state = initialState, action) {
       const aiWord = state.vocabulary.dictionary[wIndex];
       const ai = { word: aiWord, letters: [] };
 
-      return { ...state, user, ai, mode: 'game' };
+      return { ...state, user, ai, mode: constants.GAME };
     }
 
     case types.CHECK_LETTER_BY_USER: {
@@ -62,21 +63,25 @@ export function game(state = initialState, action) {
     case types.CHECK_WORD_BY_USER: {
       const word = action.word.toUpperCase();
       const win = state.ai.word === word;
-      const mode = win ? 'end' : state.mode;
+      const mode = win ? constants.END : state.mode;
       return { ...state, user: { ...state.user, win }, mode };
     }
 
     case types.CHECK_WORD_BY_AI: {
       const word = action.word.toUpperCase();
       const win = state.user.word === word;
-      const mode = win ? 'end' : state.mode;
+      const mode = win ? constants.END : state.mode;
       return { ...state, ai: { ...state.ai, win }, mode };
     }
 
     case types.ACTIVATE_AI_STEP: {
       // todo: check if ai win after each ai action not
       if (state.user.word === state.user.letters.reduce((p, c) => p + c, ''))
-        return { ...state, ai: { ...state.ai, win: true }, mode: 'end' };
+        return {
+          ...state,
+          ai: { ...state.ai, win: true },
+          mode: constants.END
+        };
 
       if (state.user.letters.length === state.user.word.length) {
         // shuffle letters if ai can't find
