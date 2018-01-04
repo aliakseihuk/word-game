@@ -1,4 +1,19 @@
 .letter {
-  border: 1px solid black;
-  border-radius: 4px;
+  font-size: 5em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffe066;
+  font-weight: bold;
+  background-color: #247ba0;
+}
+
+.placeholder {
+  color: #ffe066;
+  box-sizing: border-box;
+  border: 0.05em solid #247ba0;
+  opacity: 0.7;
 }

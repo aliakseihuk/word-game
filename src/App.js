@@ -18,7 +18,7 @@ export class App extends Component {
       ) : (
         <Finish />
       );
-    return frame;
+    return <section className="App">{frame}</section>;
   }
 }
 

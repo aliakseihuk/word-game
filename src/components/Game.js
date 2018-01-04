@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { checkLetter, checkWord, shuffle } from '../actions';
-import Letter from './Letter';
+import Word from './Word';
 
 class Game extends Component {
   constructor(props) {
@@ -39,14 +39,12 @@ class Game extends Component {
   }
 
   render() {
-    // TODO: use some id for key instead of index in array
-    const aiLetters = this.props.ai.letters.map((letter, i) => (
-      <Letter value={letter} key={i} />
-    ));
     return (
       <div>
         <p>User Word: {this.props.user.word}</p>
-        <div>User: {aiLetters}</div>
+        <div>
+          User: <Word letters={this.props.ai.letters} length={5} />
+        </div>
         <p>Opponent Word: {this.props.ai.word}</p>
         <p>Opponent: {this.props.user.letters}</p>
 
