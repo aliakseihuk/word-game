@@ -5,3 +5,5 @@ export const CHECK_LETTER = 'CHECK_LETTER';
 export const SHUFFLE = 'SHUFFLE';
 
 export const ACTIVATE_AI_STEP = 'ACTIVATE_AI_STEP';
+
+export const RESTART = 'RESTART';

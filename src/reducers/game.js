@@ -79,6 +79,10 @@ export function game(state = initialState, action) {
       }
     }
 
+    case types.RESTART: {
+      return initialState;
+    }
+
     default:
       return state;
   }

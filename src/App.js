@@ -15,8 +15,10 @@ export class App extends Component {
         <Start />
       ) : this.props.mode === constants.GAME ? (
         <Game />
-      ) : (
+      ) : this.props.mode === constants.END ? (
         <Finish />
+      ) : (
+        <div />
       );
     return <section className="App">{frame}</section>;
   }

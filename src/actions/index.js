@@ -1,6 +1,7 @@
 import * as actions from './actions';
 
 const setWord = actions.setWord;
+const restart = actions.restart;
 
 const checkLetter = letter => {
   return dispatch => {
@@ -23,4 +24,4 @@ const shuffle = () => {
   };
 };
 
-export { setWord, checkLetter, checkWord, shuffle };
+export { setWord, restart, checkLetter, checkWord, shuffle };

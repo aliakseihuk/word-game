@@ -29,4 +29,8 @@ const activateAIStep = () => {
   return { type: types.ACTIVATE_AI_STEP };
 };
 
-export { setWord, checkLetter, checkWord, shuffle, activateAIStep };
+const restart = () => {
+  return { type: types.RESTART };
+};
+
+export { setWord, checkLetter, checkWord, shuffle, activateAIStep, restart };

@@ -155,4 +155,16 @@ describe('game reducer', () => {
       expect(newState.mode).toEqual(contstants.END);
     });
   });
+
+  it('should restart', () => {
+    const someState = {
+      user: {},
+      ai: {},
+      mode: contstants.GAME
+    };
+
+    const initialState = reducer(undefined, {});
+    const newState = reducer(someState, actions.restart());
+    expect(newState).toEqual(initialState);
+  });
 });
