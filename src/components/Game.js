@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { checkLetter, checkWord, shuffle } from '../actions';
+import LetterInput from './LetterInput';
 import Word from './Word';
 
 class Game extends Component {
@@ -19,10 +20,11 @@ class Game extends Component {
     const length = event.target.value.length;
     const letter =
       length >= 2 ? event.target.value[length - 1] : event.target.value;
-    this.setState({ letter });
+    this.setState({ letter: letter.toUpperCase() });
   }
 
   onLetterSubmit() {
+    this.setState({ letter: '' });
     this.props.checkLetter(this.state.letter);
   }
 
@@ -43,15 +45,15 @@ class Game extends Component {
       <div>
         <p>User Word: {this.props.user.word}</p>
         <div>
+          Opponent Word: <Word letters={this.props.user.letters} length={5} />
+        </div>
+        <div>
           User: <Word letters={this.props.ai.letters} length={5} />
         </div>
-        <p>Opponent Word: {this.props.ai.word}</p>
         <p>Opponent: {this.props.user.letters}</p>
 
         <label>
-          Letter:
-          <input
-            type="text"
+          <LetterInput
             value={this.state.letter}
             onChange={this.handleLetterChange}
           />
