@@ -6,15 +6,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffe066;
+  color: #5a6174;
   font-weight: bold;
-  background-color: #247ba0;
+  background-color: #76c3bd;
 }
 
 .placeholder {
-  color: #ffe066;
-  box-sizing: border-box;
-  opacity: 0.7;
+  background-color: #609bcc;
 }
 
 .letter input[type='text'] {

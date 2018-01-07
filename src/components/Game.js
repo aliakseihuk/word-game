@@ -4,6 +4,8 @@ import { checkLetter, checkWord, shuffle } from '../actions';
 import LetterInput from './LetterInput';
 import Word from './Word';
 
+import './Game.css';
+
 class Game extends Component {
   constructor(props) {
     super(props);
@@ -42,37 +44,38 @@ class Game extends Component {
 
   render() {
     return (
-      <div>
-        <p>User Word: {this.props.user.word}</p>
+      <div className="Game">
+        <h2 className="alias">OPPONENT</h2>
         <div>
-          Opponent Word: <Word letters={this.props.user.letters} length={5} />
+          <Word letters={this.props.user.letters} length={5} />
         </div>
         <div>
-          User: <Word letters={this.props.ai.letters} length={5} />
+          <Word letters={this.props.ai.letters} length={5} />
         </div>
-        <p>Opponent: {this.props.user.letters}</p>
+        <h2 className="alias">PLAYER</h2>
 
         <label>
           <LetterInput
             value={this.state.letter}
             onChange={this.handleLetterChange}
           />
-          <input type="submit" onClick={this.onLetterSubmit} />
-        </label>
-        <label>
-          Word:
-          <input
-            className="wgInput"
-            type="text"
-            value={this.state.word}
-            onChange={this.handleWordChange}
-            placeholder="WORD"
-          />
-          <div className="wgButton" onClick={this.onWordSubmit}>
-            CHECK WORD
+          <div className="wgButton" onClick={this.onLetterSubmit}>
+            CHECK LETTER
           </div>
         </label>
-        <button onClick={this.onShuffle}>Shuffle</button>
+        <input
+          className="wgInput"
+          type="text"
+          value={this.state.word}
+          onChange={this.handleWordChange}
+          placeholder="WORD"
+        />
+        <div className="wgButton" onClick={this.onWordSubmit}>
+          CHECK WORD
+        </div>
+        <div className="wgButton" onClick={this.onShuffle}>
+          SHUFFLE
+        </div>
       </div>
     );
   }
