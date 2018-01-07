@@ -1,0 +1,30 @@
+.start {
+  display: flex;
+}
+
+.start .info {
+  margin: 5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #5a6174;
+}
+
+.start .info h1 {
+  margin: 0;
+  font-size: 5.25em;
+}
+
+.start .info h2 {
+  margin: 0.5em;
+  font-size: 2em;
+}
+
+.start .action {
+  margin: 7em 5em;
+}
+
+.start .action .wgInput {
+  margin-bottom: 1em;
+}

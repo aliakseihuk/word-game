@@ -62,11 +62,15 @@ class Game extends Component {
         <label>
           Word:
           <input
+            className="wgInput"
             type="text"
             value={this.state.word}
             onChange={this.handleWordChange}
+            placeholder="WORD"
           />
-          <input type="submit" onClick={this.onWordSubmit} />
+          <div className="wgButton" onClick={this.onWordSubmit}>
+            CHECK WORD
+          </div>
         </label>
         <button onClick={this.onShuffle}>Shuffle</button>
       </div>
