@@ -1,3 +1,5 @@
+import * as constants from './../constants';
+
 // todo: rename stats
 const checkLetter = (stats, letter) => {
   const letters = [...stats.letters];
@@ -21,4 +23,17 @@ const shuffle = letters => {
   return ls;
 };
 
-export { checkLetter, shuffle };
+const validateValue = (value, wordLength) => {
+  if (value.length === 0) {
+    return createError(constants.ERROR_1_ID, constants.ERROR_1_MSG);
+  } else if (value.length > 1 && value.length < wordLength) {
+    return createError(constants.ERROR_2_ID, constants.ERROR_2_MSG);
+  }
+  return undefined;
+};
+
+const createError = (id, message) => {
+  return { id, message };
+};
+
+export { checkLetter, shuffle, validateValue, createError };

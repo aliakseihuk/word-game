@@ -1,5 +1,10 @@
 import * as types from '../actions/types';
-import { checkLetter, shuffle } from './reducer.helper';
+import {
+  checkLetter,
+  shuffle,
+  validateValue,
+  createError
+} from './reducer.helper';
 import * as constants from '../constants';
 
 const initialState = {
@@ -35,25 +40,38 @@ export function game(state = initialState, action) {
       const aiWord = state.vocabulary.dictionary[wIndex];
       const ai = { word: aiWord, letters: [] };
 
-      return { ...state, user, ai, mode: constants.GAME };
+      return { ...state, user, ai, mode: constants.GAME, error: undefined };
     }
 
-    case types.CHECK_LETTER: {
-      const letter = action.letter.toUpperCase();
-      const stats = checkLetter(state.ai, letter);
-      return { ...state, ai: stats };
+    case types.CHECK: {
+      const value = action.value.toUpperCase();
+      const error = validateValue(value, state.ai.word.length);
+      if (error) {
+        return { ...state, error };
+      }
+      if (value.length === 1) {
+        const stats = checkLetter(state.ai, value);
+        return { ...state, ai: stats };
+      } else {
+        // check word
+        const win = state.ai.word === value;
+        const mode = win ? constants.END : state.mode;
+        return {
+          ...state,
+          user: { ...state.user, win },
+          mode,
+          error: undefined
+        };
+      }
     }
 
     case types.SHUFFLE: {
-      const ls = shuffle(state.ai.letters);
-      return { ...state, ai: { ...state.ai, letters: ls } };
-    }
-
-    case types.CHECK_WORD: {
-      const word = action.word.toUpperCase();
-      const win = state.ai.word === word;
-      const mode = win ? constants.END : state.mode;
-      return { ...state, user: { ...state.user, win }, mode };
+      const error =
+        state.ai.letters.length < 2
+          ? createError(constants.ERROR_3_ID, constants.ERROR_3_MSG)
+          : undefined;
+      const ls = error ? state.ai.letters : shuffle(state.ai.letters);
+      return { ...state, ai: { ...state.ai, letters: ls }, error };
     }
 
     case types.ACTIVATE_AI_STEP: {

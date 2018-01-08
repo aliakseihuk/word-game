@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { checkLetter, checkWord, shuffle } from '../actions';
-import LetterInput from './LetterInput';
+import { check, shuffle } from '../actions';
 import Word from './Word';
 
 import './Game.css';
@@ -10,32 +9,21 @@ class Game extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { letter: '', word: '' };
-    this.handleLetterChange = this.handleLetterChange.bind(this);
-    this.onLetterSubmit = this.onLetterSubmit.bind(this);
-    this.handleWordChange = this.handleWordChange.bind(this);
-    this.onWordSubmit = this.onWordSubmit.bind(this);
+    this.state = { letterOrWord: '' };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.onLetterOrWordSubmit = this.onLetterOrWordSubmit.bind(this);
     this.onShuffle = this.onShuffle.bind(this);
   }
 
-  handleLetterChange(event) {
-    const length = event.target.value.length;
-    const letter =
-      length >= 2 ? event.target.value[length - 1] : event.target.value;
-    this.setState({ letter: letter.toUpperCase() });
+  handleInputChange(event) {
+    this.setState({ letterOrWord: event.target.value.toUpperCase() });
   }
 
-  onLetterSubmit() {
-    this.setState({ letter: '' });
-    this.props.checkLetter(this.state.letter);
-  }
-
-  handleWordChange(event) {
-    this.setState({ word: event.target.value });
-  }
-
-  onWordSubmit() {
-    this.props.checkWord(this.state.word);
+  onLetterOrWordSubmit() {
+    if (this.state.letterOrWord) {
+      this.props.check(this.state.letterOrWord);
+      this.setState({ letterOrWord: '' });
+    }
   }
 
   onShuffle() {
@@ -44,39 +32,37 @@ class Game extends Component {
 
   render() {
     return (
-      <div className="Game">
+      <section className="Game">
         <h2 className="alias">OPPONENT</h2>
         <div>
-          <Word letters={this.props.user.letters} length={5} />
+          <Word
+            letters={this.props.user.letters}
+            length={this.props.user.word.length}
+          />
         </div>
         <div>
-          <Word letters={this.props.ai.letters} length={5} />
+          <Word
+            letters={this.props.ai.letters}
+            length={this.props.user.word.length}
+          />
         </div>
         <h2 className="alias">PLAYER</h2>
-
-        <label>
-          <LetterInput
-            value={this.state.letter}
-            onChange={this.handleLetterChange}
+        <section>
+          <input
+            className="wgInput"
+            type="text"
+            value={this.state.letterOrWord}
+            onChange={this.handleInputChange}
+            placeholder="LETTER OR WORD"
           />
-          <div className="wgButton" onClick={this.onLetterSubmit}>
-            CHECK LETTER
+          <div className="wgButton" onClick={this.onLetterOrWordSubmit}>
+            CHECK
           </div>
-        </label>
-        <input
-          className="wgInput"
-          type="text"
-          value={this.state.word}
-          onChange={this.handleWordChange}
-          placeholder="WORD"
-        />
-        <div className="wgButton" onClick={this.onWordSubmit}>
-          CHECK WORD
-        </div>
-        <div className="wgButton" onClick={this.onShuffle}>
-          SHUFFLE
-        </div>
-      </div>
+          <div className="wgButton" onClick={this.onShuffle}>
+            SHUFFLE
+          </div>
+        </section>
+      </section>
     );
   }
 }
@@ -89,8 +75,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    checkLetter: letter => dispatch(checkLetter(letter)),
-    checkWord: word => dispatch(checkWord(word)),
+    check: value => dispatch(check(value)),
     shuffle: () => dispatch(shuffle())
   };
 };

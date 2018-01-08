@@ -2,7 +2,7 @@ import * as actions from '../../actions/actions';
 import * as types from '../../actions/types';
 import { game as reducer } from '../game';
 import * as reducerHelper from '../reducer.helper';
-import * as contstants from '../../constants';
+import * as constants from '../../constants';
 
 describe('game reducer', () => {
   it('should return initial state', () => {
@@ -14,28 +14,48 @@ describe('game reducer', () => {
     const word = 'TEST';
     const state = reducer(undefined, actions.setWord(word));
     expect(state.user).toEqual({ word, letters: [] });
-    expect(state.mode).toEqual(contstants.GAME);
+    expect(state.mode).toEqual(constants.GAME);
   });
 
-  describe('should check letters', () => {
+  describe('should check', () => {
     const state = {
       user: {
         word: 'TESTU',
-        letters: ['E']
+        letters: ['E'],
+        win: false
       },
       ai: {
         word: 'TESTA',
-        letters: ['E']
+        letters: ['E'],
+        win: false
       }
     };
 
-    it('by user', () => {
+    const getState = value => {
+      return reducer(state, actions.check(value));
+    };
+
+    it('with empty entry error', () => {
+      const state = getState('');
+      const error = reducerHelper.createError(
+        constants.ERROR_1_ID,
+        constants.ERROR_1_MSG
+      );
+      expect(state.error).toEqual(error);
+    });
+
+    it('with wrong length error', () => {
+      const state = getState('TEST');
+      const error = reducerHelper.createError(
+        constants.ERROR_2_ID,
+        constants.ERROR_2_MSG
+      );
+      expect(state.error).toEqual(error);
+    });
+
+    it('valid letter', () => {
       let newState;
       let expectedai;
-      const getState = letter => {
-        const action = actions.checkLetter(letter);
-        return reducer(state, action);
-      };
 
       newState = getState('U');
       expect(newState).toEqual({ ...state });
@@ -51,22 +71,16 @@ describe('game reducer', () => {
       expectedai = { ...state.ai, letters: [...state.ai.letters, 'T', 'T'] };
       expect(newState).toEqual({ ...state, ai: expectedai });
     });
-  });
 
-  describe('should check words', () => {
-    const state = {
-      user: {
-        word: 'TESTU'
-      },
-      ai: {
-        word: 'TESTA'
-      }
-    };
+    it('wrong word', () => {
+      const newState = reducer(state, actions.check('TESTU'));
+      expect(newState.user.win).toEqual(false);
+    });
 
-    it('correct by user', () => {
-      const newState = reducer(state, actions.checkWord('TESTA'));
+    it('valid word', () => {
+      const newState = reducer(state, actions.check('TESTA'));
       expect(newState.user.win).toEqual(true);
-      expect(newState.mode).toEqual(contstants.END);
+      expect(newState.mode).toEqual(constants.END);
     });
   });
 
@@ -93,7 +107,19 @@ describe('game reducer', () => {
       Math = mock; // eslint-disable-line no-native-reassign
     });
 
-    it('by user', () => {
+    it('with error empty or one letter', () => {
+      const newState = reducer({ ai: { letters: [] } }, actions.shuffle());
+      const error = reducerHelper.createError(
+        constants.ERROR_3_ID,
+        constants.ERROR_3_MSG
+      );
+      expect(newState.error).toEqual(error);
+
+      reducer({ ai: { letters: ['A'] } }, actions.shuffle());
+      expect(newState.error).toEqual(error);
+    });
+
+    it('letters', () => {
       const newState = reducer(state, { type: types.SHUFFLE });
       expect(newState.ai.letters).toEqual(['T', 'S', 'A', 'T', 'E']);
     });
@@ -152,7 +178,7 @@ describe('game reducer', () => {
 
       const newState = reducer(state, { type: types.ACTIVATE_AI_STEP });
       expect(newState.ai.win).toEqual(true);
-      expect(newState.mode).toEqual(contstants.END);
+      expect(newState.mode).toEqual(constants.END);
     });
   });
 
@@ -160,7 +186,7 @@ describe('game reducer', () => {
     const someState = {
       user: {},
       ai: {},
-      mode: contstants.GAME
+      mode: constants.GAME
     };
 
     const initialState = reducer(undefined, {});

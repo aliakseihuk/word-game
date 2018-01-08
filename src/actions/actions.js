@@ -7,17 +7,10 @@ const setWord = word => {
   };
 };
 
-const checkLetter = letter => {
+const check = value => {
   return {
-    type: types.CHECK_LETTER,
-    letter
-  };
-};
-
-const checkWord = word => {
-  return {
-    type: types.CHECK_WORD,
-    word
+    type: types.CHECK,
+    value
   };
 };
 
@@ -33,4 +26,4 @@ const restart = () => {
   return { type: types.RESTART };
 };
 
-export { setWord, checkLetter, checkWord, shuffle, activateAIStep, restart };
+export { setWord, check, shuffle, activateAIStep, restart };
