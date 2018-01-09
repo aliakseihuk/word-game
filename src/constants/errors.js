@@ -1,11 +1,3 @@
-// game mods
-
-const START = 'START';
-const GAME = 'GAME';
-const END = 'END';
-
-// errors move to different files
-
 const ERROR_1_ID = 1;
 const ERROR_1_MSG = "You can't check nothing";
 
@@ -16,7 +8,6 @@ const ERROR_2_MSG =
 const ERROR_3_ID = 3;
 const ERROR_3_MSG = 'Guess some letters to shuffle them';
 
-export { START, GAME, END };
 export {
   ERROR_1_ID,
   ERROR_1_MSG,

@@ -5,7 +5,8 @@ import {
   validateValue,
   createError
 } from './reducer.helper';
-import * as constants from '../constants';
+import * as errors from '../constants/errors';
+import * as mods from '../constants/mods';
 
 const initialState = {
   vocabulary: {
@@ -26,7 +27,7 @@ const initialState = {
     letters: [],
     win: false
   },
-  mode: constants.START
+  mode: mods.START
 };
 
 export function game(state = initialState, action) {
@@ -40,7 +41,7 @@ export function game(state = initialState, action) {
       const aiWord = state.vocabulary.dictionary[wIndex];
       const ai = { word: aiWord, letters: [] };
 
-      return { ...state, user, ai, mode: constants.GAME, error: undefined };
+      return { ...state, user, ai, mode: mods.GAME, error: undefined };
     }
 
     case types.CHECK: {
@@ -55,7 +56,7 @@ export function game(state = initialState, action) {
       } else {
         // check word
         const win = state.ai.word === value;
-        const mode = win ? constants.END : state.mode;
+        const mode = win ? mods.END : state.mode;
         return {
           ...state,
           user: { ...state.user, win },
@@ -68,7 +69,7 @@ export function game(state = initialState, action) {
     case types.SHUFFLE: {
       const error =
         state.ai.letters.length < 2
-          ? createError(constants.ERROR_3_ID, constants.ERROR_3_MSG)
+          ? createError(errors.ERROR_3_ID, errors.ERROR_3_MSG)
           : undefined;
       const ls = error ? state.ai.letters : shuffle(state.ai.letters);
       return { ...state, ai: { ...state.ai, letters: ls }, error };
@@ -80,7 +81,7 @@ export function game(state = initialState, action) {
         return {
           ...state,
           ai: { ...state.ai, win: true },
-          mode: constants.END
+          mode: mods.END
         };
 
       if (state.user.letters.length === state.user.word.length) {

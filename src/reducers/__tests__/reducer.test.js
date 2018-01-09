@@ -2,7 +2,8 @@ import * as actions from '../../actions/actions';
 import * as types from '../../actions/types';
 import { game as reducer } from '../game';
 import * as reducerHelper from '../reducer.helper';
-import * as constants from '../../constants';
+import * as mods from '../../constants/mods';
+import * as errors from '../../constants/errors';
 
 describe('game reducer', () => {
   it('should return initial state', () => {
@@ -14,7 +15,7 @@ describe('game reducer', () => {
     const word = 'TEST';
     const state = reducer(undefined, actions.setWord(word));
     expect(state.user).toEqual({ word, letters: [] });
-    expect(state.mode).toEqual(constants.GAME);
+    expect(state.mode).toEqual(mods.GAME);
   });
 
   describe('should check', () => {
@@ -38,8 +39,8 @@ describe('game reducer', () => {
     it('with empty entry error', () => {
       const state = getState('');
       const error = reducerHelper.createError(
-        constants.ERROR_1_ID,
-        constants.ERROR_1_MSG
+        errors.ERROR_1_ID,
+        errors.ERROR_1_MSG
       );
       expect(state.error).toEqual(error);
     });
@@ -47,8 +48,8 @@ describe('game reducer', () => {
     it('with wrong length error', () => {
       const state = getState('TEST');
       const error = reducerHelper.createError(
-        constants.ERROR_2_ID,
-        constants.ERROR_2_MSG
+        errors.ERROR_2_ID,
+        errors.ERROR_2_MSG
       );
       expect(state.error).toEqual(error);
     });
@@ -80,7 +81,7 @@ describe('game reducer', () => {
     it('valid word', () => {
       const newState = reducer(state, actions.check('TESTA'));
       expect(newState.user.win).toEqual(true);
-      expect(newState.mode).toEqual(constants.END);
+      expect(newState.mode).toEqual(mods.END);
     });
   });
 
@@ -110,8 +111,8 @@ describe('game reducer', () => {
     it('with error empty or one letter', () => {
       const newState = reducer({ ai: { letters: [] } }, actions.shuffle());
       const error = reducerHelper.createError(
-        constants.ERROR_3_ID,
-        constants.ERROR_3_MSG
+        errors.ERROR_3_ID,
+        errors.ERROR_3_MSG
       );
       expect(newState.error).toEqual(error);
 
@@ -178,7 +179,7 @@ describe('game reducer', () => {
 
       const newState = reducer(state, { type: types.ACTIVATE_AI_STEP });
       expect(newState.ai.win).toEqual(true);
-      expect(newState.mode).toEqual(constants.END);
+      expect(newState.mode).toEqual(mods.END);
     });
   });
 
@@ -186,7 +187,7 @@ describe('game reducer', () => {
     const someState = {
       user: {},
       ai: {},
-      mode: constants.GAME
+      mode: mods.GAME
     };
 
     const initialState = reducer(undefined, {});

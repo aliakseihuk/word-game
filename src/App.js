@@ -6,16 +6,16 @@ import Start from './components/Start';
 import Game from './components/Game';
 import Finish from './components/Finish';
 
-import * as constants from './constants';
+import * as mods from './constants/mods.js';
 
 export class App extends Component {
   render() {
     const frame =
-      this.props.mode === constants.START ? (
+      this.props.mode === mods.START ? (
         <Start />
-      ) : this.props.mode === constants.GAME ? (
+      ) : this.props.mode === mods.GAME ? (
         <Game />
-      ) : this.props.mode === constants.END ? (
+      ) : this.props.mode === mods.END ? (
         <Finish />
       ) : (
         <div />

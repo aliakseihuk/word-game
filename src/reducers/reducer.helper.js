@@ -1,4 +1,4 @@
-import * as constants from './../constants';
+import * as errors from '../constants/errors';
 
 // todo: rename stats
 const checkLetter = (stats, letter) => {
@@ -25,9 +25,9 @@ const shuffle = letters => {
 
 const validateValue = (value, wordLength) => {
   if (value.length === 0) {
-    return createError(constants.ERROR_1_ID, constants.ERROR_1_MSG);
+    return createError(errors.ERROR_1_ID, errors.ERROR_1_MSG);
   } else if (value.length > 1 && value.length < wordLength) {
-    return createError(constants.ERROR_2_ID, constants.ERROR_2_MSG);
+    return createError(errors.ERROR_2_ID, errors.ERROR_2_MSG);
   }
   return undefined;
 };
