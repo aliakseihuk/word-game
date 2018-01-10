@@ -23,6 +23,7 @@
 }
 
 .wgButton {
+  margin: 1em 0em;
   padding: 2em 5em;
   border-radius: 0.3em;
   color: #faf8f2;

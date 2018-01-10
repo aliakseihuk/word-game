@@ -48,16 +48,18 @@ class Game extends Component {
         </div>
         <h2 className="alias">PLAYER</h2>
         <section>
-          <input
-            className="wgInput"
-            type="text"
-            value={this.state.letterOrWord}
-            onChange={this.handleInputChange}
-            placeholder="LETTER OR WORD"
-          />
-          <div className="wgButton" onClick={this.onLetterOrWordSubmit}>
-            CHECK
-          </div>
+          <section className="check">
+            <input
+              className="wgInput"
+              type="text"
+              value={this.state.letterOrWord}
+              onChange={this.handleInputChange}
+              placeholder="LETTER OR WORD"
+            />
+            <div className="wgButton" onClick={this.onLetterOrWordSubmit}>
+              CHECK
+            </div>
+          </section>
           <div className="wgButton" onClick={this.onShuffle}>
             SHUFFLE
           </div>
