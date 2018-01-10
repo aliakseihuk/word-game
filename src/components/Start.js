@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { setWord } from '../actions';
+import ValidationError from './ValidationError';
 import './Start.css';
 
 class Start extends Component {
@@ -24,6 +25,11 @@ class Start extends Component {
   }
 
   render() {
+    const error = this.props.error ? (
+      <ValidationError error={this.props.error} />
+    ) : (
+      undefined
+    );
     return (
       <section className="start">
         <section className="info">
@@ -40,6 +46,7 @@ class Start extends Component {
             onChange={this.handleChange}
             placeholder="WORD"
           />
+          {error}
           <div className="wgButton" onClick={this.handleSubmit}>
             START GAME
           </div>
@@ -50,7 +57,9 @@ class Start extends Component {
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    error: state.game.error
+  };
 };
 const mapDispatchToProps = dispatch => {
   return {

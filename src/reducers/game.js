@@ -33,6 +33,12 @@ const initialState = {
 export function game(state = initialState, action) {
   switch (action.type) {
     case types.SET_WORD: {
+      if (action.word.length < 3) {
+        return {
+          ...state,
+          error: createError(errors.ERROR_0_ID, errors.ERROR_0_MSG)
+        };
+      }
       state = { ...state, error: undefined };
       const user = { word: action.word.toUpperCase(), letters: [] };
 
@@ -46,12 +52,12 @@ export function game(state = initialState, action) {
     }
 
     case types.CHECK: {
-      state = { ...state, error: undefined };
       const value = action.value.toUpperCase();
       const error = validateValue(value, state.ai.word.length);
       if (error) {
         return { ...state, error };
       }
+      state = { ...state, error: undefined };
       if (value.length === 1) {
         const stats = checkLetter(state.ai, value);
         return { ...state, ai: stats };
@@ -62,8 +68,7 @@ export function game(state = initialState, action) {
         return {
           ...state,
           user: { ...state.user, win },
-          mode,
-          error: undefined
+          mode
         };
       }
     }

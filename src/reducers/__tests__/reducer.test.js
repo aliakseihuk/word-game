@@ -4,6 +4,7 @@ import { game as reducer } from '../game';
 import * as reducerHelper from '../reducer.helper';
 import * as mods from '../../constants/mods';
 import * as errors from '../../constants/errors';
+import { createError } from '../reducer.helper';
 
 describe('game reducer', () => {
   it('should return initial state', () => {
@@ -16,6 +17,24 @@ describe('game reducer', () => {
     const state = reducer(undefined, actions.setWord(word));
     expect(state.user).toEqual({ word, letters: [] });
     expect(state.mode).toEqual(mods.GAME);
+  });
+
+  it('should return error with short words', () => {
+    let word;
+    let state;
+    const error = createError(errors.ERROR_0_ID, errors.ERROR_0_MSG);
+    word = '';
+    state = reducer(undefined, actions.setWord(word));
+    expect(state.error).toEqual(error);
+    word = 'W';
+    state = reducer(undefined, actions.setWord(word));
+    expect(state.error).toEqual(error);
+    word = 'WW';
+    state = reducer(undefined, actions.setWord(word));
+    expect(state.error).toEqual(error);
+    word = 'WWW';
+    state = reducer(undefined, actions.setWord(word));
+    expect(state.error).not.toBeDefined();
   });
 
   describe('should check', () => {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { check, shuffle } from '../actions';
 import Word from './Word';
+import ValidationError from './ValidationError';
 
 import './Game.css';
 
@@ -32,7 +33,7 @@ class Game extends Component {
 
   render() {
     const error = this.props.error ? (
-      <section className="wgError">*{this.props.error.message}</section>
+      <ValidationError error={this.props.error} />
     ) : (
       undefined
     );
