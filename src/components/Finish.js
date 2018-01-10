@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { restart } from '../actions';
+import './Finish.css';
 
 class Finish extends Component {
   constructor(props) {
@@ -16,9 +17,11 @@ class Finish extends Component {
 
   render() {
     return (
-      <section>
-        <div>{this.props.userWin ? 'you win' : 'you lose'}</div>
-        <button onClick={this.onRestartClick}>Restart</button>
+      <section className="Finish">
+        <h1>{this.props.userWin ? 'you win' : 'you lose'}</h1>
+        <div className="wgButton" onClick={this.onRestartClick}>
+          Restart
+        </div>
       </section>
     );
   }
