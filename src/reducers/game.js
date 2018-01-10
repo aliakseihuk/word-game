@@ -33,6 +33,7 @@ const initialState = {
 export function game(state = initialState, action) {
   switch (action.type) {
     case types.SET_WORD: {
+      state = { ...state, error: undefined };
       const user = { word: action.word.toUpperCase(), letters: [] };
 
       const wIndex = Math.floor(
@@ -41,10 +42,11 @@ export function game(state = initialState, action) {
       const aiWord = state.vocabulary.dictionary[wIndex];
       const ai = { word: aiWord, letters: [] };
 
-      return { ...state, user, ai, mode: mods.GAME, error: undefined };
+      return { ...state, user, ai, mode: mods.GAME };
     }
 
     case types.CHECK: {
+      state = { ...state, error: undefined };
       const value = action.value.toUpperCase();
       const error = validateValue(value, state.ai.word.length);
       if (error) {
@@ -67,6 +69,7 @@ export function game(state = initialState, action) {
     }
 
     case types.SHUFFLE: {
+      state = { ...state, error: undefined };
       const error =
         state.ai.letters.length < 2
           ? createError(errors.ERROR_3_ID, errors.ERROR_3_MSG)

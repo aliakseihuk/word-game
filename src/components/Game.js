@@ -31,6 +31,11 @@ class Game extends Component {
   }
 
   render() {
+    const error = this.props.error ? (
+      <section className="wgError">*{this.props.error.message}</section>
+    ) : (
+      undefined
+    );
     return (
       <section className="Game">
         <h2 className="alias">OPPONENT</h2>
@@ -47,6 +52,7 @@ class Game extends Component {
           />
         </div>
         <h2 className="alias">PLAYER</h2>
+        {error}
         <section>
           <section className="check">
             <input
@@ -72,7 +78,8 @@ class Game extends Component {
 const mapStateToProps = state => {
   return {
     user: state.game.user,
-    ai: state.game.ai
+    ai: state.game.ai,
+    error: state.game.error
   };
 };
 const mapDispatchToProps = dispatch => {
