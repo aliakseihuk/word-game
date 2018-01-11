@@ -8,14 +8,13 @@ import {
 import * as errors from '../constants/errors';
 import * as mods from '../constants/mods';
 
+import * as enWords from '../data/en-vocabulary.json';
+
 const initialState = {
   vocabulary: {
     language: 'en',
     alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    dictionary: [
-      // make as set object
-      'HELLO'
-    ]
+    dictionary: enWords
   },
   user: {
     word: '',
@@ -42,10 +41,11 @@ export function game(state = initialState, action) {
       state = { ...state, error: undefined };
       const user = { word: action.word.toUpperCase(), letters: [] };
 
-      const wIndex = Math.floor(
-        Math.random() * state.vocabulary.dictionary.length
+      const words = state.vocabulary.dictionary.filter(
+        w => w.length === action.word.length
       );
-      const aiWord = state.vocabulary.dictionary[wIndex];
+      const wIndex = Math.floor(Math.random() * words.length);
+      const aiWord = words[wIndex];
       const ai = { word: aiWord, letters: [] };
 
       return { ...state, user, ai, mode: mods.GAME };
