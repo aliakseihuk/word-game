@@ -8,7 +8,7 @@ import {
 import * as errors from '../constants/errors';
 import * as mods from '../constants/mods';
 
-import * as enWords from '../data/en-vocabulary.json';
+import enWords from '../data/en-vocabulary.json';
 
 const initialState = {
   vocabulary: {
