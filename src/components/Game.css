@@ -1,0 +1,18 @@
+.Game .alias {
+  font-size: 2em;
+  margin: 0.3em;
+  text-align: center;
+}
+
+.Game .check {
+  display: flex;
+  align-items: center;
+}
+
+.Game .check .wgInput {
+  margin-right: 1em;
+}
+
+.Game .check .wgButton {
+  flex: 1;
+}

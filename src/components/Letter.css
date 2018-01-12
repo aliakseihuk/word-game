@@ -1,0 +1,16 @@
+.letter {
+  font-size: 5em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #5a6174;
+  font-weight: bold;
+  background-color: #76c3bd;
+}
+
+.placeholder {
+  background-color: #609bcc;
+}
