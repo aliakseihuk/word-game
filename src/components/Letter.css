@@ -9,8 +9,28 @@
   color: #5a6174;
   font-weight: bold;
   background-color: #76c3bd;
+  transition: color 0.5s ease;
+}
+
+@keyframes newLetterAnimation {
+  0% {
+    background-color: #609bcc;
+    color: #609bcc;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    background-color: #76c3bd;
+    color: #5a6174;
+  }
 }
 
 .placeholder {
   background-color: #609bcc;
+}
+
+.letter:not(.placeholder) {
+  animation-name: newLetterAnimation;
+  animation-duration: 1s;
 }
