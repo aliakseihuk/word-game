@@ -1,14 +1,26 @@
+import { push } from 'react-router-redux';
 import * as actions from './actions';
 
-const setWord = actions.setWord;
+const setWord = word => {
+  return dispatch => {
+    dispatch(actions.setWord(word));
+    dispatch(push('/game'));
+  };
+};
 const restart = actions.restart;
+
+const isWin = state => {
+  return state.game.user.win || state.game.ai.win;
+};
 
 const check = value => {
   return (dispatch, getState) => {
     dispatch(actions.check(value));
-    const state = getState();
-    if (!state.error) {
+    if (!getState().game.error) {
       dispatch(actions.activateAIStep());
+    }
+    if (isWin(getState())) {
+      dispatch(push('/end'));
     }
   };
 };
@@ -16,8 +28,7 @@ const check = value => {
 const shuffle = () => {
   return (dispatch, getState) => {
     dispatch(actions.shuffle());
-    const state = getState();
-    if (!state.error) {
+    if (!getState().game.error) {
       dispatch(actions.activateAIStep());
     }
   };

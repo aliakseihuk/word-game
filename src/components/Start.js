@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { setWord } from '../actions';
@@ -9,7 +10,7 @@ class Start extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { inputValue: '' };
+    this.state = { inputValue: props.word };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -58,13 +59,16 @@ class Start extends Component {
 
 const mapStateToProps = state => {
   return {
+    word: state.game.user.word,
     error: state.game.error
   };
 };
-const mapDispatchToProps = dispatch => {
-  return {
-    setWord: word => dispatch(setWord(word))
-  };
-};
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      setWord: word => setWord(word)
+    },
+    dispatch
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Start);
