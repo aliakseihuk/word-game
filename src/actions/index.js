@@ -31,6 +31,9 @@ const shuffle = () => {
     if (!getState().game.error) {
       dispatch(actions.activateAIStep());
     }
+    if (isWin(getState())) {
+      dispatch(push('/end'));
+    }
   };
 };
 
