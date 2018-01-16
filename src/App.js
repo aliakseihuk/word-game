@@ -10,11 +10,9 @@ export class App extends Component {
   render() {
     return (
       <section className="App">
-        <main>
-          <Route exact path="/" component={Start} />
-          <Route exact path="/game" component={Game} />
-          <Route exact path="/end" component={Finish} />
-        </main>
+        <Route exact path="/" component={Start} />
+        <Route exact path="/game" component={Game} />
+        <Route exact path="/end" component={Finish} />
       </section>
     );
   }
