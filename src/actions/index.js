@@ -1,13 +1,14 @@
 import { push } from 'react-router-redux';
 import * as actions from './actions';
 
+const restart = actions.restart;
+
 const setWord = word => {
   return dispatch => {
     dispatch(actions.setWord(word));
     dispatch(push('/game'));
   };
 };
-const restart = actions.restart;
 
 const isWin = state => {
   return state.game.user.win || state.game.ai.win;
