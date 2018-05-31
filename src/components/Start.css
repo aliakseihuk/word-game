@@ -28,3 +28,9 @@
 .start .action .wgInput {
   margin-bottom: 1em;
 }
+
+@media screen and (max-width: 1023px) {
+  .start {
+    flex-direction: column;
+  }
+}
