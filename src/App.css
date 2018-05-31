@@ -32,4 +32,9 @@
   text-align: center;
   outline: none;
   font-size: 1em;
+  cursor: pointer;
+}
+
+.wgButton:hover {
+  filter: brightness(1.1);
 }
