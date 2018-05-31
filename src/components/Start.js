@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { setWord } from '../actions';
+import Button from './button/Button';
 import ValidationError from './ValidationError';
 import './Start.css';
 
@@ -21,7 +22,7 @@ class Start extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.setWord(this.state.inputValue);
+    this.props.setWord(this.state.inputValue || 'WORD');
   }
 
   render() {
@@ -47,9 +48,10 @@ class Start extends Component {
             placeholder="WORD"
           />
           {error}
-          <div className="wgButton" onClick={this.handleSubmit}>
-            START GAME
-          </div>
+          <Button
+            title="start game"
+            onClick={event => this.handleSubmit(event)}
+          />
         </section>
       </section>
     );
