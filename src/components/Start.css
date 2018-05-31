@@ -26,6 +26,7 @@
 }
 
 .start .action .wgInput {
+  display: block;
   margin-bottom: 1em;
 }
 
