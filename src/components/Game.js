@@ -26,10 +26,8 @@ class Game extends Component {
   }
 
   onLetterOrWordSubmit() {
-    if (this.state.letterOrWord) {
-      this.props.check(this.state.letterOrWord);
-      this.setState({ letterOrWord: '' });
-    }
+    this.props.check(this.state.letterOrWord);
+    this.setState({ letterOrWord: '' });
   }
 
   onShuffle() {
