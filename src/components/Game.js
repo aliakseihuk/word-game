@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { check, shuffle } from '../actions';
-import Word from './Word';
+import Actor from './actor/Actor';
+import Button from './button/Button';
 import ValidationError from './ValidationError';
 
 import './Game.css';
@@ -24,6 +25,8 @@ class Game extends Component {
     if (this.state.letterOrWord) {
       this.props.check(this.state.letterOrWord);
       this.setState({ letterOrWord: '' });
+    } else {
+      console.log('state empty!');
     }
   }
 
@@ -39,20 +42,18 @@ class Game extends Component {
     );
     return (
       <section className="Game">
-        <h2 className="alias">OPPONENT</h2>
-        <div>
-          <Word
-            letters={this.props.user.letters}
-            length={this.props.user.word.length}
-          />
-        </div>
-        <div>
-          <Word
-            letters={this.props.ai.letters}
-            length={this.props.user.word.length}
-          />
-        </div>
-        <h2 className="alias">PLAYER</h2>
+        <Actor
+          name="opponent"
+          namePos="top"
+          wordLetters={this.props.user.letters}
+          wordLength={this.props.user.word.length}
+        />
+        <hr />
+        <Actor
+          name="player"
+          wordLetters={this.props.ai.letters}
+          wordLength={this.props.user.word.length}
+        />
         {error}
         <section>
           <section className="check">
@@ -63,13 +64,9 @@ class Game extends Component {
               onChange={this.handleInputChange}
               placeholder="LETTER OR WORD"
             />
-            <div className="wgButton" onClick={this.onLetterOrWordSubmit}>
-              CHECK
-            </div>
+            <Button title="check" onClick={() => this.onLetterOrWordSubmit()} />
           </section>
-          <div className="wgButton" onClick={this.onShuffle}>
-            SHUFFLE
-          </div>
+          <Button title="shuffle" onClick={() => this.onShuffle()} />
         </section>
       </section>
     );
