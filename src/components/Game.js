@@ -18,15 +18,17 @@ class Game extends Component {
   }
 
   handleInputChange(event) {
-    this.setState({ letterOrWord: event.target.value.toUpperCase() });
+    const val =
+      event.target.value.length <= this.props.user.word.length
+        ? event.target.value
+        : event.target.value.substr(0, this.props.user.word.length);
+    this.setState({ letterOrWord: val.toUpperCase() });
   }
 
   onLetterOrWordSubmit() {
     if (this.state.letterOrWord) {
       this.props.check(this.state.letterOrWord);
       this.setState({ letterOrWord: '' });
-    } else {
-      console.log('state empty!');
     }
   }
 
