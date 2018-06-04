@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 
-import Start from './components/Start';
+import Start from './components/start/Start';
 import Game from './components/Game';
 import Finish from './components/Finish';
 
