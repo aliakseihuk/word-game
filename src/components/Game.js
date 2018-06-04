@@ -25,7 +25,8 @@ class Game extends Component {
     this.setState({ letterOrWord: val.toUpperCase() });
   }
 
-  onLetterOrWordSubmit() {
+  onLetterOrWordSubmit(event) {
+    event.preventDefault();
     this.props.check(this.state.letterOrWord);
     this.setState({ letterOrWord: '' });
   }
@@ -57,14 +58,16 @@ class Game extends Component {
         {error}
         <section>
           <section className="check">
-            <input
-              className="wgInput"
-              type="text"
-              value={this.state.letterOrWord}
-              onChange={this.handleInputChange}
-              placeholder="LETTER OR WORD"
-            />
-            <Button title="check" onClick={() => this.onLetterOrWordSubmit()} />
+            <form onSubmit={event => this.onLetterOrWordSubmit(event)}>
+              <input
+                className="wgInput"
+                type="text"
+                value={this.state.letterOrWord}
+                onChange={this.handleInputChange}
+                placeholder="LETTER OR WORD"
+              />
+              <Button title="check" type="submit" />
+            </form>
           </section>
           <Button title="shuffle" onClick={() => this.onShuffle()} />
         </section>
