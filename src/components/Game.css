@@ -9,10 +9,18 @@
   align-items: center;
 }
 
-.Game .check .wgInput {
+.Game .check .check-input {
   margin-right: 1em;
+  flex: 3;
 }
 
 .Game .check .wgButton {
   flex: 1;
+}
+
+.Game .form {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
