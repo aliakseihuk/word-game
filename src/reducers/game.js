@@ -1,3 +1,5 @@
+import LocalStorage from '../localStorage/LocalStorage';
+
 import * as types from '../actions/types';
 import {
   checkLetter,
@@ -104,6 +106,30 @@ export function game(state = initialState, action) {
         const stats = checkLetter(state.user, letter);
         return { ...state, user: stats };
       }
+    }
+
+    case types.LOAD: {
+      if (!LocalStorage.isEmpty()) {
+        const ai = LocalStorage.readData('ai');
+        const user = LocalStorage.readData('user');
+        const mode = LocalStorage.readData('mode');
+        const error = undefined;
+
+        return { ...initialState, user, ai, mode, error };
+      }
+
+      const error = createError(errors.ERROR_4_ID, errors.ERROR_4_MSG);
+      const mode = mods.START;
+
+      return { ...initialState, error, mode };
+    }
+
+    case types.SAVE: {
+      LocalStorage.saveData('ai', state.ai);
+      LocalStorage.saveData('user', state.user);
+      LocalStorage.saveData('mode', state.mode);
+
+      return state;
     }
 
     case types.RESTART: {
