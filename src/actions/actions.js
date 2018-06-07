@@ -26,4 +26,12 @@ const restart = () => {
   return { type: types.RESTART };
 };
 
-export { setWord, check, shuffle, activateAIStep, restart };
+const load = () => {
+  return { type: types.LOAD };
+};
+
+const save = () => {
+  return { type: types.SAVE };
+};
+
+export { setWord, check, shuffle, activateAIStep, restart, load, save };
