@@ -1,6 +1,5 @@
 import * as actions from './actions';
 
-const setWord = actions.setWord;
 const restart = actions.restart;
 
 const check = value => {
@@ -8,6 +7,7 @@ const check = value => {
     dispatch(actions.check(value));
     const state = getState();
     if (!state.error) {
+      dispatch(actions.save());
       dispatch(actions.activateAIStep());
     }
   };
@@ -18,7 +18,18 @@ const shuffle = () => {
     dispatch(actions.shuffle());
     const state = getState();
     if (!state.error) {
+      dispatch(actions.save());
       dispatch(actions.activateAIStep());
+    }
+  };
+};
+
+const setWord = word => {
+  return (dispatch, getState) => {
+    dispatch(actions.setWord(word));
+    const state = getState();
+    if (!state.error) {
+      dispatch(actions.save());
     }
   };
 };
