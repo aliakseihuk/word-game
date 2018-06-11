@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import NewGame from '../newgame/NewGame';
-import LoadGame from '../loadgame/LoadGame';
-import './Start.css';
+import NewGame from '../newgame/index';
+import LoadGame from '../loadgame/index';
+import './style.css';
 
 class Start extends Component {
   render() {

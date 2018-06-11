@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { restart } from '../actions';
 
-import Button from './button/Button';
+import Button from './button/index';
 
 import './Finish.css';
 
