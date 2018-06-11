@@ -12,19 +12,16 @@ class Game extends Component {
     super(props);
 
     this.state = { letterOrWord: '' };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.onLetterOrWordSubmit = this.onLetterOrWordSubmit.bind(this);
-    this.onShuffle = this.onShuffle.bind(this);
   }
 
-  handleInputChange(event) {
+  handleInputChange = event => {
     const { value } = event.target;
     const val =
       value.length <= this.props.user.word.length
         ? value
         : value.substr(0, this.props.user.word.length);
     this.setState({ letterOrWord: val.toUpperCase() });
-  }
+  };
 
   onLetterOrWordSubmit = event => {
     event.preventDefault();
