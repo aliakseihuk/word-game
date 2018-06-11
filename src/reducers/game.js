@@ -109,19 +109,14 @@ export function game(state = initialState, action) {
     }
 
     case types.LOAD: {
-      if (!LocalStorage.isEmpty()) {
-        const ai = LocalStorage.readData('ai');
-        const user = LocalStorage.readData('user');
-        const mode = LocalStorage.readData('mode');
-        const error = undefined;
+      if (action.value.error) {
+        const error = createError(errors.ERROR_4_ID, errors.ERROR_4_MSG);
+        const mode = mods.START;
 
-        return { ...initialState, user, ai, mode, error };
+        return { ...initialState, error, mode };
       }
 
-      const error = createError(errors.ERROR_4_ID, errors.ERROR_4_MSG);
-      const mode = mods.START;
-
-      return { ...initialState, error, mode };
+      return action.value;
     }
 
     case types.SAVE: {
