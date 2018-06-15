@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { setWord, load } from '../../actions/actions';
 import LocalStorage from '../../localStorage/LocalStorage';
 
-import Button from '../button/index';
+import Button from '../button';
 
 class LoadGame extends Component {
   hasSavedGames() {

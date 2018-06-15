@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setWord } from '../../actions';
 
-import Button from '../button/index';
+import Button from '../button';
 import ValidationError from '../ValidationError';
 
 class NewGame extends Component {

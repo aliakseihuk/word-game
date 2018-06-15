@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import NewGame from '../newgame/index';
-import LoadGame from '../loadgame/index';
+import NewGame from '../newgame';
+import LoadGame from '../loadgame';
 import './style.css';
 
 class Start extends Component {

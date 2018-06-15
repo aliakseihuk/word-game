@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { check, shuffle } from '../actions';
-import Actor from './actor/index';
-import Button from './button/index';
+import Actor from './actor';
+import Button from './button';
 import ValidationError from './ValidationError';
 
 import './Game.css';
