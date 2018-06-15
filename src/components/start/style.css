@@ -6,7 +6,7 @@
   margin: 5em;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   color: #5a6174;
 }
@@ -26,5 +26,12 @@
 }
 
 .start .action .wgInput {
+  display: block;
   margin-bottom: 1em;
+}
+
+@media screen and (max-width: 1023px) {
+  .start {
+    flex-direction: column;
+  }
 }

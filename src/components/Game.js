@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { check, shuffle } from '../actions';
-import Word from './Word';
+import Actor from './actor';
+import Button from './button';
 import ValidationError from './ValidationError';
 
 import './Game.css';
@@ -11,25 +12,26 @@ class Game extends Component {
     super(props);
 
     this.state = { letterOrWord: '' };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.onLetterOrWordSubmit = this.onLetterOrWordSubmit.bind(this);
-    this.onShuffle = this.onShuffle.bind(this);
   }
 
-  handleInputChange(event) {
-    this.setState({ letterOrWord: event.target.value.toUpperCase() });
-  }
+  handleInputChange = event => {
+    const { value } = event.target;
+    const val =
+      value.length <= this.props.user.word.length
+        ? value
+        : value.substr(0, this.props.user.word.length);
+    this.setState({ letterOrWord: val.toUpperCase() });
+  };
 
-  onLetterOrWordSubmit() {
-    if (this.state.letterOrWord) {
-      this.props.check(this.state.letterOrWord);
-      this.setState({ letterOrWord: '' });
-    }
-  }
+  onLetterOrWordSubmit = event => {
+    event.preventDefault();
+    this.props.check(this.state.letterOrWord);
+    this.setState({ letterOrWord: '' });
+  };
 
-  onShuffle() {
+  onShuffle = () => {
     this.props.shuffle();
-  }
+  };
 
   render() {
     const error = this.props.error ? (
@@ -39,37 +41,33 @@ class Game extends Component {
     );
     return (
       <section className="Game">
-        <h2 className="alias">OPPONENT</h2>
-        <div>
-          <Word
-            letters={this.props.user.letters}
-            length={this.props.user.word.length}
-          />
-        </div>
-        <div>
-          <Word
-            letters={this.props.ai.letters}
-            length={this.props.user.word.length}
-          />
-        </div>
-        <h2 className="alias">PLAYER</h2>
+        <Actor
+          name="opponent"
+          namePos="top"
+          wordLetters={this.props.user.letters}
+          wordLength={this.props.user.word.length}
+        />
+        <hr />
+        <Actor
+          name="player"
+          wordLetters={this.props.ai.letters}
+          wordLength={this.props.user.word.length}
+        />
         {error}
         <section>
           <section className="check">
-            <input
-              className="wgInput"
-              type="text"
-              value={this.state.letterOrWord}
-              onChange={this.handleInputChange}
-              placeholder="LETTER OR WORD"
-            />
-            <div className="wgButton" onClick={this.onLetterOrWordSubmit}>
-              CHECK
-            </div>
+            <form className="form" onSubmit={this.onLetterOrWordSubmit}>
+              <input
+                className="wgInput check-input"
+                type="text"
+                value={this.state.letterOrWord}
+                onChange={this.handleInputChange}
+                placeholder="LETTER OR WORD"
+              />
+              <Button title="check" type="submit" />
+            </form>
           </section>
-          <div className="wgButton" onClick={this.onShuffle}>
-            SHUFFLE
-          </div>
+          <Button title="shuffle" onClick={this.onShuffle} />
         </section>
       </section>
     );
