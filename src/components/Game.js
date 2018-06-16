@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { check, shuffle } from '../actions';
-import Actor from './actor/Actor';
-import Button from './button/Button';
+import Actor from './actor';
+import Button from './button';
 import ValidationError from './ValidationError';
 
 import './Game.css';
@@ -12,28 +12,26 @@ class Game extends Component {
     super(props);
 
     this.state = { letterOrWord: '' };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.onLetterOrWordSubmit = this.onLetterOrWordSubmit.bind(this);
-    this.onShuffle = this.onShuffle.bind(this);
   }
 
-  handleInputChange(event) {
+  handleInputChange = event => {
+    const { value } = event.target;
     const val =
-      event.target.value.length <= this.props.user.word.length
-        ? event.target.value
-        : event.target.value.substr(0, this.props.user.word.length);
+      value.length <= this.props.user.word.length
+        ? value
+        : value.substr(0, this.props.user.word.length);
     this.setState({ letterOrWord: val.toUpperCase() });
-  }
+  };
 
-  onLetterOrWordSubmit(event) {
+  onLetterOrWordSubmit = event => {
     event.preventDefault();
     this.props.check(this.state.letterOrWord);
     this.setState({ letterOrWord: '' });
-  }
+  };
 
-  onShuffle() {
+  onShuffle = () => {
     this.props.shuffle();
-  }
+  };
 
   render() {
     const error = this.props.error ? (
@@ -58,9 +56,9 @@ class Game extends Component {
         {error}
         <section>
           <section className="check">
-            <form onSubmit={event => this.onLetterOrWordSubmit(event)}>
+            <form className="form" onSubmit={this.onLetterOrWordSubmit}>
               <input
-                className="wgInput"
+                className="wgInput check-input"
                 type="text"
                 value={this.state.letterOrWord}
                 onChange={this.handleInputChange}
@@ -69,7 +67,7 @@ class Game extends Component {
               <Button title="check" type="submit" />
             </form>
           </section>
-          <Button title="shuffle" onClick={() => this.onShuffle()} />
+          <Button title="shuffle" onClick={this.onShuffle} />
         </section>
       </section>
     );

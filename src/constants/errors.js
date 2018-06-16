@@ -11,6 +11,9 @@ const ERROR_2_MSG =
 const ERROR_3_ID = 3;
 const ERROR_3_MSG = 'Guess some letters to shuffle them';
 
+const ERROR_4_ID = 4;
+const ERROR_4_MSG = 'Failed to load game. Initial state loaded';
+
 export {
   ERROR_0_ID,
   ERROR_0_MSG,
@@ -19,5 +22,7 @@ export {
   ERROR_2_ID,
   ERROR_2_MSG,
   ERROR_3_ID,
-  ERROR_3_MSG
+  ERROR_3_MSG,
+  ERROR_4_ID,
+  ERROR_4_MSG
 };

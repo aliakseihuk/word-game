@@ -1,3 +1,4 @@
+import LocalStorage from '../localStorage/LocalStorage';
 import * as types from './types';
 
 const setWord = word => {
@@ -26,4 +27,26 @@ const restart = () => {
   return { type: types.RESTART };
 };
 
-export { setWord, check, shuffle, activateAIStep, restart };
+const load = () => {
+  let loadedState = {
+    error: undefined
+  };
+
+  if (!LocalStorage.isEmpty()) {
+    const ai = LocalStorage.readData('ai');
+    const user = LocalStorage.readData('user');
+    const mode = LocalStorage.readData('mode');
+
+    loadedState = { ...loadedState, user, ai, mode };
+  } else {
+    loadedState.error = true;
+  }
+
+  return { type: types.LOAD, loadedState };
+};
+
+const save = () => {
+  return { type: types.SAVE };
+};
+
+export { setWord, check, shuffle, activateAIStep, restart, load, save };
