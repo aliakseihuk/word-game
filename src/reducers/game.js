@@ -87,12 +87,13 @@ export function game(state = initialState, action) {
 
     case types.ACTIVATE_AI_STEP: {
       // todo: check if ai win after each ai action not
-      if (state.user.word === state.user.letters.reduce((p, c) => p + c, ''))
+      if (state.user.word === state.user.letters.reduce((p, c) => p + c, '')) {
         return {
           ...state,
           ai: { ...state.ai, win: true },
           mode: mods.END
         };
+      }
 
       if (state.user.letters.length === state.user.word.length) {
         // shuffle letters if ai can't find

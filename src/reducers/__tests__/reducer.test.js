@@ -56,21 +56,21 @@ describe('game reducer', () => {
     };
 
     it('with empty entry error', () => {
-      const state = getState('');
+      const errorState = getState('');
       const error = reducerHelper.createError(
         errors.ERROR_1_ID,
         errors.ERROR_1_MSG
       );
-      expect(state.error).toEqual(error);
+      expect(errorState.error).toEqual(error);
     });
 
     it('with wrong length error', () => {
-      const state = getState('TEST');
+      const errorState = getState('TEST');
       const error = reducerHelper.createError(
         errors.ERROR_2_ID,
         errors.ERROR_2_MSG
       );
-      expect(state.error).toEqual(error);
+      expect(errorState.error).toEqual(error);
     });
 
     it('valid letter', () => {

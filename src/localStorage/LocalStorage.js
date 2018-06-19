@@ -14,6 +14,10 @@ class LocalStorage {
 
   static hydrateComponentState(component) {
     for (let key in component.state) {
+      if (!component.state.hasOwnProperty(key)) {
+        continue;
+      }
+
       const data = this.readData(key);
 
       if (data) {
