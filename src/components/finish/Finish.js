@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { restart } from '../actions';
+import { restart } from '../../actions';
 
-import Button from './button';
+import Button from '../button';
 
 import './Finish.css';
 
@@ -20,7 +20,7 @@ class Finish extends Component {
   render() {
     return (
       <section className="Finish">
-        <h1>{this.props.userWin ? 'THE VICTORY IS YOURS' : 'WASTED'}</h1>
+        <h1> {this.props.userWin ? 'THE VICTORY IS YOURS' : 'WASTED'} </h1>{' '}
         <Button onClick={this.onRestartClick} title="Restart" />
       </section>
     );
