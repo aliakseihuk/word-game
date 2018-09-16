@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
 
-import Finish from './components/finish/';
+import Finish from './components/Finish/';
 import Game from './components/Game';
 import Start from './components/start';
 

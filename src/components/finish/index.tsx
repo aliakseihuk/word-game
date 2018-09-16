@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { restart } from 'actions';
-
+import { FINISH_MESSAGES } from 'locale';
 import Button from 'components/button';
 
-import './Finish.css';
-import { FINISH_MESSAGES } from '../../locale';
+import './styles.css';
 
 // TODO: Define Game interface
 type State = { game: any };
