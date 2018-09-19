@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { restart } from 'actions';
-import { FINISH_MESSAGES } from 'locale';
-import Button from 'components/button';
+import { restart } from 'src/actions';
+import { FINISH_MESSAGES } from 'src/locale';
+import Button from 'src/components/button';
 
 import './styles.css';
 
