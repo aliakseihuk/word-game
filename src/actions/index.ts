@@ -3,12 +3,13 @@ import * as actions from './actions';
 
 const restart = actions.restart;
 
-const isWin = state => {
+// TODO: define disathch and state-related interfaces
+const isWin = (state: any) => {
   return state.game.user.win || state.game.ai.win;
 };
 
-const check = value => {
-  return (dispatch, getState) => {
+const check = (value: any) => {
+  return (dispatch: any, getState: Callback) => {
     dispatch(actions.check(value));
     const state = getState();
     if (!state.error) {
@@ -22,7 +23,7 @@ const check = value => {
 };
 
 const shuffle = () => {
-  return (dispatch, getState) => {
+  return (dispatch: Callback, getState: Callback) => {
     dispatch(actions.shuffle());
     const state = getState();
     if (!state.error) {
@@ -35,8 +36,8 @@ const shuffle = () => {
   };
 };
 
-const setWord = word => {
-  return (dispatch, getState) => {
+const setWord = (word: string) => {
+  return (dispatch: Callback, getState: Callback) => {
     dispatch(actions.setWord(word));
     dispatch(push('/game'));
     const state = getState();

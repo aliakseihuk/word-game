@@ -1,14 +1,15 @@
 import LocalStorage from '../localStorage/LocalStorage';
 import * as types from './types';
+import { ILoadedState, IUser } from '../interfaces';
 
-const setWord = word => {
+const setWord = (word: unknown) => {
   return {
     type: types.SET_WORD,
     word
   };
 };
 
-const check = value => {
+const check = (value: unknown) => {
   return {
     type: types.CHECK,
     value
@@ -28,13 +29,13 @@ const restart = () => {
 };
 
 const load = () => {
-  let loadedState = {
-    error: undefined
+  let loadedState: ILoadedState = {
+    error: false
   };
 
   if (!LocalStorage.isEmpty()) {
     const ai = LocalStorage.readData('ai');
-    const user = LocalStorage.readData('user');
+    const user: IUser = LocalStorage.readData('user');
     const mode = LocalStorage.readData('mode');
 
     loadedState = { ...loadedState, user, ai, mode };
