@@ -1,0 +1,9 @@
+.word {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.word .letter {
+  margin: 5px;
+}
