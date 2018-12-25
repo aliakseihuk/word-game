@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { setWord } from '../../actions';
 
 import Button from '../button';
-import ValidationError from '../ValidationError';
+import ValidationError from 'src/components/ValidationError';
 
 class NewGame extends Component {
   constructor(props) {
