@@ -25,7 +25,7 @@ const activateAIStep = () => {
 };
 
 const restart = () => {
-  return { type: types.RESTART };
+  return { type: types.SET_WORD };
 };
 
 const load = () => {
