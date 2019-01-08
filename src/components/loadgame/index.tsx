@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setWord, load } from 'src/actions/actions';
+import { setWord, load } from 'src/actions';
 import LocalStorage from 'src/services/localStorage/LocalStorage';
 import Button from 'src/components/button';
 
@@ -22,7 +22,7 @@ class LoadGame extends React.Component<Props> {
     const { load } = this.props;
 
     if (load) {
-      load()
+      load();
     }
   }
 

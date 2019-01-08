@@ -1,6 +1,7 @@
-import LocalStorage from '../localStorage/LocalStorage';
+import LocalStorage from 'src/services/localStorage/LocalStorage';
 import * as types from './types';
-import { ILoadedState, IUser } from '../interfaces';
+import { ILoadedState, IUser, IAi } from 'src/interfaces';
+import { GAME_MODES } from 'src/constants';
 
 const setWord = (word: unknown) => {
   return {
@@ -30,13 +31,13 @@ const restart = () => {
 
 const load = () => {
   let loadedState: ILoadedState = {
-    error: false
+    error: false,
   };
 
   if (!LocalStorage.isEmpty()) {
-    const ai = LocalStorage.readData('ai');
-    const user: IUser = LocalStorage.readData('user');
-    const mode = LocalStorage.readData('mode');
+    const ai = LocalStorage.readData<IAi>('ai');
+    const user = LocalStorage.readData<IUser>('user');
+    const mode = LocalStorage.readData<GAME_MODES>('mode');
 
     loadedState = { ...loadedState, user, ai, mode };
   } else {

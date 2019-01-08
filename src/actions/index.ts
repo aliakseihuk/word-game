@@ -52,4 +52,11 @@ const restart = (): Callback => {
   }
 };
 
-export { setWord, restart, check, shuffle };
+const load = (): Callback => {
+  return (dispatch: Callback, getState: Callback) => {
+    dispatch(actions.load());
+    dispatch(push('/game'));
+  }
+};
+
+export { setWord, restart, check, shuffle, load };
