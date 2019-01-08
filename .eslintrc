@@ -1,6 +1,7 @@
 {
     "extends": "react-app",
     "rules": {
-        "no-shadowed-variable": false
+        "no-shadowed-variable": false,
+        "no-console": 0
     }
 }
