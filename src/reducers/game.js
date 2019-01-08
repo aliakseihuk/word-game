@@ -1,9 +1,9 @@
-import LocalStorage from '../localStorage/LocalStorage';
+import LocalStorage from '../services/localStorage/LocalStorage';
 
 import * as types from '../actions/types';
 import {
   checkLetter,
-  shuffle,
+  shuffleLetters,
   validateValue,
   createError
 } from './reducer.helper';
@@ -97,7 +97,7 @@ export function game(state = initialState, action) {
 
       if (state.user.letters.length === state.user.word.length) {
         // shuffle letters if ai can't find
-        const ls = shuffle(state.user.letters);
+        const ls = shuffleLetters(state.user.letters);
         return { ...state, user: { ...state.user, letters: ls } };
       } else {
         const alphabet = state.vocabulary.alphabet;
@@ -110,14 +110,14 @@ export function game(state = initialState, action) {
     }
 
     case types.LOAD: {
-      if (action.value.error) {
+      if (action.loadedState && action.loadedState.error) {
         const error = createError(errors.ERROR_4_ID, errors.ERROR_4_MSG);
         const mode = mods.START;
 
         return { ...initialState, error, mode };
       }
 
-      return action.value;
+      return action.loadedState;
     }
 
     case types.SAVE: {
