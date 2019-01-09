@@ -7,7 +7,8 @@
         "husky": "^0.14.3",
         "lint-staged": "^6.0.0",
         "prettier": "^1.9.2",
-        "react": "^16.2.0",
+        "react": "^16.7.0",
+        "react-async-component": "^2.0.0",
         "react-dom": "^16.2.0",
         "react-redux": "^5.0.6",
         "react-router-dom": "^4.2.2",
@@ -24,9 +25,9 @@
     },
     "scripts": {
         "precommit": "lint-staged",
-        "start": "react-scripts-ts start",
-        "build": "react-scripts-ts build",
-        "test": "react-scripts-ts test --env=jsdom",
+        "start": "NODE_PATH=./ react-scripts-ts start",
+        "build": "NODE_PATH=./ react-scripts-ts build",
+        "test": "NODE_PATH=./ react-scripts-ts test --env=jsdom",
         "eject": "react-scripts-ts eject",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build"

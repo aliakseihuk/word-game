@@ -1,9 +1,7 @@
 import { push } from 'react-router-redux';
 import * as actions from './actions';
 
-const restart = actions.restart;
-
-// TODO: define disathch and state-related interfaces
+// TODO: define dispatch and state-related interfaces
 const isWin = (state: any) => {
   return state.game.user.win || state.game.ai.win;
 };
@@ -47,4 +45,18 @@ const setWord = (word: string) => {
   };
 };
 
-export { setWord, restart, check, shuffle };
+const restart = (): Callback => {
+  return (dispatch: Callback, getState: Callback) => {
+    dispatch(actions.restart());
+    dispatch(push('/'));
+  }
+};
+
+const load = (): Callback => {
+  return (dispatch: Callback, getState: Callback) => {
+    dispatch(actions.load());
+    dispatch(push('/game'));
+  }
+};
+
+export { setWord, restart, check, shuffle, load };

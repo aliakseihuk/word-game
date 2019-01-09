@@ -14,7 +14,7 @@ const checkLetter = (stats, letter) => {
   return { ...stats, letters };
 };
 
-const shuffle = letters => {
+const shuffleLetters = letters => {
   const ls = [...letters];
   for (let i = ls.length - 1; i > 0; --i) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -36,4 +36,4 @@ const createError = (id, message) => {
   return { id, message };
 };
 
-export { checkLetter, shuffle, validateValue, createError };
+export { checkLetter, shuffleLetters, validateValue, createError };

@@ -1,5 +1,5 @@
 import React from 'react';
-import Letter from './Letter';
+import Letter from '../Letter/Letter';
 import PropTypes from 'prop-types';
 
 import './Word.css';
@@ -11,7 +11,7 @@ const Word = ({ letters, length }) => {
   const elements = renderedLetters.map((l, i) => (
     <Letter value={l} isPlaceholder={i >= letters.length} key={i + l} />
   ));
-  return <section className="word">{elements}</section>;
+  return <section className="word"> {elements} </section>;
 };
 
 Word.propTypes = {

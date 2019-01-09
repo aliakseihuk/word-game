@@ -1,4 +1,5 @@
-// TODO: Define this interfaces
 export interface IUser {
-    stub: string;
+    word: string,
+    letters: string[],
+    win: boolean,
 }

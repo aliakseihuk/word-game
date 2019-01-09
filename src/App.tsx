@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import { asyncComponent } from 'react-async-component';
+
 import './App.css';
 
-import Finish from './components/Finish';
-import Game from './components/Game';
-import Start from './components/start';
+const Finish = asyncComponent({
+  resolve: () => require('./components/finish'),
+});
+const Game = asyncComponent({
+  resolve: () => require('./components/Game'),
+});
+const Start = asyncComponent({
+  resolve: () => require('./components/start'),
+});
 
 export class App extends Component {
+  // TODO: ADD ROUTES Constants
   public render() {
     return (
       <section className="App">
         <Route exact={true} path="/" component={Start} />
-        <Route exact={true} path="/game" component={Game} />
-        <Route exact={true} path="/end" component={Finish} />
+        <Route path="/game" component={Game} />
+        <Route path="/end" component={Finish} />
       </section>
     );
   }

@@ -177,9 +177,9 @@ describe('game reducer', () => {
         }
       };
 
-      reducerHelper.shuffle = jest.fn();
+      reducerHelper.shuffleLetters = jest.fn();
       reducer(state, { type: types.ACTIVATE_AI_STEP });
-      expect(reducerHelper.shuffle).toBeCalled();
+      expect(reducerHelper.shuffleLetters).toBeCalled();
     });
 
     it('win if ai recognizes word', () => {
@@ -204,8 +204,16 @@ describe('game reducer', () => {
 
   it('should restart', () => {
     const someState = {
-      user: {},
-      ai: {},
+      user: {
+        word: '',
+        letters: [],
+        win: false
+      },
+      ai: {
+        word: '',
+        letters: [],
+        win: false
+      },
       mode: mods.GAME
     };
 

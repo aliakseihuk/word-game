@@ -6,23 +6,25 @@ import Button from 'src/components/button';
 
 import './styles.css';
 
-// TODO: Define Game interface
-type State = { game: any };
-type Props = {} & Readonly<typeof defaultProps>;
+type Props = {} & Partial<Readonly<typeof defaultProps>>;
 
 const defaultProps = {
-  restart: () => { return; },
   userWin: false,
+  restart: (...args: any[]): any => { return; },
 };
 
-class Finish extends React.Component<Props, State> {
+class Finish extends React.Component<Props> {
   public static readonly defaultProps = defaultProps;
 
-  public onRestartClick = () => {
-    this.props.restart();
+  public onRestartClick = (): void => {
+    const { restart } = this.props;
+
+    if (restart) {
+      restart();
+    }
   };
 
-  public render() {
+  public render(): JSX.Element {
     return (
       <section className="Finish">
         <h1>{this.props.userWin ? FINISH_MESSAGES.WIN : FINISH_MESSAGES.LOSE}</h1>
@@ -32,15 +34,15 @@ class Finish extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: GameState): Props => {
   return {
-    userWin: state.game.user.win
+    userWin: state.game.user.win,
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Callback): Props => {
   return {
-    restart: () => dispatch(restart())
+    restart: () => dispatch(restart()),
   };
 };
 
