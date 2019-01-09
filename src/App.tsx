@@ -5,7 +5,7 @@ import { asyncComponent } from 'react-async-component';
 import './App.css';
 
 const Finish = asyncComponent({
-  resolve: () => require('./components/Finish'),
+  resolve: () => require('./components/finish'),
 });
 const Game = asyncComponent({
   resolve: () => require('./components/Game'),

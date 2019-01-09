@@ -13,7 +13,7 @@ class LocalStorage {
   }
 
   public static hydrateComponentState<T extends {} = {}>(component: React.Component) {
-    for (let key in component.state) {
+    for (const key in component.state) {
       if (!component.state.hasOwnProperty(key)) {
         continue;
       }

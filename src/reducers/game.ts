@@ -23,10 +23,11 @@ const initialState = {
     letters: [],
     win: false
   },
-  mode: mods.START
+  mode: mods.START,
+  error: undefined
 };
 
-export function game(state = initialState, action) {
+export function game(state = initialState, action: any) {
   switch (action.type) {
     case types.SET_WORD:
       {
