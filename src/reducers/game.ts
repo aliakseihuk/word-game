@@ -38,7 +38,7 @@ export function game(state = initialState, action) {
         }
         state = {
           ...state,
-          error: null,
+          error: undefined,
         };
         const user = {
           word: action
