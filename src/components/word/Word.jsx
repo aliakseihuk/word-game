@@ -1,5 +1,5 @@
 import React from 'react';
-import Letter from '../Letter/Letter';
+import Letter from '../letter/Letter';
 import PropTypes from 'prop-types';
 
 import './Word.css';
