@@ -25,9 +25,9 @@
     },
     "scripts": {
         "precommit": "lint-staged",
-        "start": "NODE_PATH=./ react-scripts-ts start",
-        "build": "NODE_PATH=./ react-scripts-ts build",
-        "test": "NODE_PATH=./ react-scripts-ts test --env=jsdom",
+        "start": "cross-env NODE_PATH=./ react-scripts-ts start",
+        "build": "cross-env NODE_PATH=./ react-scripts-ts build",
+        "test": "cross-env NODE_PATH=./ react-scripts-ts test --env=jsdom",
         "eject": "react-scripts-ts eject",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d build"
@@ -41,6 +41,7 @@
         "@types/react-redux": "^6.0.2",
         "@types/react-router-dom": "^4.2.7",
         "@types/react-router-redux": "^5.0.15",
+        "cross-env": "^5.2.0",
         "gh-pages": "^1.1.0",
         "typescript": "^3.0.3"
     },
