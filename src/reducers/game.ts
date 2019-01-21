@@ -4,30 +4,12 @@ import * as types from 'src/actions/types';
 import {checkLetter, shuffleLetters, validateValue, createError} from './reducer.helper';
 import * as errors from 'src/constants/errors';
 import * as mods from 'src/constants/mods';
+import CONFIG from 'src/config';
+import IGameState from 'src/interfaces/IGameState';
 
-import enWords from 'src/data/en-vocabulary.json';
+const { initialState } = CONFIG;
 
-const initialState = {
-  vocabulary: {
-    language: 'en',
-    alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    dictionary: enWords
-  },
-  user: {
-    word: '',
-    letters: [],
-    win: false
-  },
-  ai: {
-    word: '',
-    letters: [],
-    win: false
-  },
-  mode: mods.START,
-  error: undefined
-};
-
-export function game(state = initialState, action: any) {
+export function game(state: IGameState = initialState, action: any) {
   switch (action.type) {
     case types.SET_WORD:
       {
