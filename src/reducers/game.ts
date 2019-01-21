@@ -6,6 +6,7 @@ import * as errors from 'src/constants/errors';
 import * as mods from 'src/constants/mods';
 import CONFIG from 'src/config';
 import IGameState from 'src/interfaces/IGameState';
+import activateAiStepReducer from './ai/activateAiStepReducer';
 
 const { initialState } = CONFIG;
 
@@ -24,10 +25,10 @@ export function game(state: IGameState = initialState, action: any) {
           error: undefined,
         };
         const user = {
+          ...initialState.user,
           word: action
             .word
             .toUpperCase(),
-          letters: []
         };
 
         const words = state
@@ -37,8 +38,8 @@ export function game(state: IGameState = initialState, action: any) {
         const wIndex = Math.floor(Math.random() * words.length);
         const aiWord = words[wIndex];
         const ai = {
+          ...initialState.ai,
           word: aiWord,
-          letters: []
         };
 
         return {
@@ -110,38 +111,7 @@ export function game(state: IGameState = initialState, action: any) {
 
     case types.ACTIVATE_AI_STEP:
       {
-        // todo: check if ai win after each ai action not
-        if (state.user.word === state.user.letters.reduce((p, c) => p + c, '')) {
-          return {
-            ...state,
-            ai: {
-              ...state.ai,
-              win: true,
-            },
-            mode: mods.END
-          };
-        }
-
-        if (state.user.letters.length === state.user.word.length) {
-          // shuffle letters if ai can't find
-          const letters = shuffleLetters(state.user.letters);
-          return {
-            ...state,
-            user: {
-              ...state.user,
-              letters,
-            }
-          };
-        } else {
-          const alphabet = state.vocabulary.alphabet;
-          const letter = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-          const user = checkLetter(state.user, letter);
-          
-          return {
-            ...state,
-            user,
-          };
-        }
+        return activateAiStepReducer(state);
       }
 
     case types.LOAD:
