@@ -8,7 +8,7 @@ const Finish = asyncComponent({
   resolve: () => require('./components/finish'),
 });
 const Game = asyncComponent({
-  resolve: () => require('./components/Game'),
+  resolve: () => require('./components/game'),
 });
 const Start = asyncComponent({
   resolve: () => require('./components/start'),
