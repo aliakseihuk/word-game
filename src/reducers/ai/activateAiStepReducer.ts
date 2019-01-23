@@ -30,7 +30,6 @@ const activateAiStepReducer = (state: IGameState) => {
   } else {
     const letter = pickLetter(state.user.checkedLetters);
     const user = checkLetter(state.user, letter);
-    
     if (user.checkedLetters) {
       user.checkedLetters.push(letter);
     }

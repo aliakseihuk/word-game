@@ -6,6 +6,8 @@ import * as mods from '../../constants/mods';
 import * as errors from '../../constants/errors';
 import { createError } from '../reducer.helper';
 
+import config from 'src/config';
+
 describe('game reducer', () => {
   it('should return initial state', () => {
     const initialState = reducer(undefined, {});
@@ -14,8 +16,9 @@ describe('game reducer', () => {
 
   it('should set word', () => {
     const word = 'TEST';
+    const initialUserState = config.initialState.user;
     const state = reducer(undefined, actions.setWord(word));
-    expect(state.user).toEqual({ word, letters: [] });
+    expect(state.user).toEqual({ ...initialUserState, word });
     expect(state.mode).toEqual(mods.GAME);
   });
 
@@ -152,16 +155,15 @@ describe('game reducer', () => {
   describe('should automate ai step', () => {
     it("check letter if ai doesn't know all letters", () => {
       const state = {
-        vocabulary: {
-          alphabet: 'ABC'
-        },
+        ...config.initialState,
         user: {
+          ...config.initialState.user,
           word: 'TESTU',
           letters: ['T', 'T', 'E', 'S']
         }
       };
 
-      reducerHelper.checkLetter = jest.fn();
+      reducerHelper.checkLetter = jest.fn(reducerHelper.checkLetter);
       reducer(state, { type: types.ACTIVATE_AI_STEP });
       expect(reducerHelper.checkLetter).toBeCalled();
     });
