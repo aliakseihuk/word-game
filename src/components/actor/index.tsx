@@ -1,5 +1,5 @@
 import React from 'react';
-import Word from 'src/components/Word';
+import Word from 'src/components/word';
 
 export const enum ACTOR_NAME_POSITIONS {
   TOP = 'top',

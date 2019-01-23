@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { check, shuffle } from 'src/actions';
 import Actor, { ACTOR_NAME_POSITIONS } from 'src/components/actor';
 import Button from 'src/components/button';
-import ValidationError from 'src/components/ValidationError';
+import ValidationError from 'src/components/validationError';
 import { IUser, IAi } from 'src/interfaces';
 import { INPUT_TYPES, ACTOR_KEYS } from 'src/constants';
 

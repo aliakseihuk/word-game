@@ -1,5 +1,5 @@
 import React from 'react';
-import Letter from 'src/components/Letter';
+import Letter from 'src/components/letter';
 import { FILL_PATTERNS } from 'src/constants';
 
 import './Word.css';
