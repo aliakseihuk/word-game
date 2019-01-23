@@ -1,7 +1,7 @@
 import IGameState from "src/interfaces/IGameState";
 import { GAME_MODES } from "src/constants";
 import { shuffleLetters, checkLetter } from "../reducer.helper";
-import { pickLetter } from "./ai.reducer.helper";
+import { pickLetter } from "./helpers/ai.reducer.helper";
 
 export default (state: IGameState) => {
  // todo: check if ai win after each ai action not
