@@ -1,14 +1,14 @@
 import { ALPHABET } from "src/constants";
 
-export const pickLetterFromAlphabet = (lettersToSkip: string[] = []) => {
+export const pickLetter = (checkedLetters: string[] = []) => {
     const alphabet = ALPHABET.split('');
     
-    for (let letter of lettersToSkip) {
+    for (let letter of checkedLetters) {
         letter = letter.toUpperCase();
-        const letterIndex = alphabet.indexOf(letter);
+        const index = alphabet.indexOf(letter);
         
-        if (letterIndex > -1) {
-            alphabet.splice(letterIndex, 1);
+        if (index > -1) {
+            alphabet.splice(index, 1);
         }
     }
 

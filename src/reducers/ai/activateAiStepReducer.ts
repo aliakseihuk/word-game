@@ -1,7 +1,7 @@
 import IGameState from "src/interfaces/IGameState";
 import { GAME_MODES } from "src/constants";
 import { shuffleLetters, checkLetter } from "../reducer.helper";
-import { pickLetterFromAlphabet } from "./ai.reducer.helper";
+import { pickLetter } from "./ai.reducer.helper";
 
 const activateAiStepReducer = (state: IGameState) => {
  // todo: check if ai win after each ai action not
@@ -28,7 +28,7 @@ const activateAiStepReducer = (state: IGameState) => {
       }
     };
   } else {
-    const letter = pickLetterFromAlphabet(state.user.checkedLetters);
+    const letter = pickLetter(state.user.checkedLetters);
     const user = checkLetter(state.user, letter);
     
     if (user.checkedLetters) {
