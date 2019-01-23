@@ -6,7 +6,7 @@ import * as errors from 'src/constants/errors';
 import * as mods from 'src/constants/mods';
 import CONFIG from 'src/config';
 import IGameState from 'src/interfaces/IGameState';
-import activateAiStepReducer from './ai/activateAiStepReducer';
+import AiReducers from './ai';
 
 const { initialState } = CONFIG;
 
@@ -111,7 +111,7 @@ export function game(state: IGameState = initialState, action: any) {
 
     case types.ACTIVATE_AI_STEP:
       {
-        return activateAiStepReducer(state);
+        return AiReducers.activateAiStepReducer(state);
       }
 
     case types.LOAD:

@@ -3,7 +3,7 @@ import { GAME_MODES } from "src/constants";
 import { shuffleLetters, checkLetter } from "../reducer.helper";
 import { pickLetter } from "./ai.reducer.helper";
 
-const activateAiStepReducer = (state: IGameState) => {
+export default (state: IGameState) => {
  // todo: check if ai win after each ai action not
  if (state.user.word === state.user.letters.reduce((p, c) => p + c, '')) {
     return {
@@ -41,5 +41,3 @@ const activateAiStepReducer = (state: IGameState) => {
     };
   }
 }
-
-export default activateAiStepReducer;
