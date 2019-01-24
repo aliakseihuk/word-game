@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Letter.css';
+import './style.css';
 
 const Letter = ({ value, isPlaceholder = false }) => {
   let classes = 'letter';

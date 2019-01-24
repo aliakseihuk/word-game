@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setWord, load } from 'src/actions';
-import LocalStorage from 'src/services/localStorage/LocalStorage';
+import LocalStorage from 'src/services/local-storage';
 import Button from 'src/components/button';
 
 type Props = {

@@ -1,4 +1,4 @@
-import LocalStorage from 'src/services/localStorage/LocalStorage';
+import LocalStorage from 'src/services/local-storage';
 
 import * as types from 'src/actions/types';
 import {checkLetter, shuffleLetters, validateValue, createError} from './reducer.helper';

@@ -4,7 +4,7 @@ import { restart } from 'src/actions';
 import { FINISH_MESSAGES } from 'src/locale';
 import Button from 'src/components/button';
 
-import './styles.css';
+import './style.css';
 
 type Props = {} & Partial<Readonly<typeof defaultProps>>;
 

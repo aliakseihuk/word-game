@@ -1,4 +1,4 @@
-import LocalStorage from 'src/services/localStorage/LocalStorage';
+import LocalStorage from 'src/services/local-storage';
 import * as types from './types';
 import { ILoadedState, IUser, IAi } from 'src/interfaces';
 import { GAME_MODES } from 'src/constants';

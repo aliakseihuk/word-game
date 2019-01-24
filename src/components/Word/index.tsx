@@ -2,7 +2,7 @@ import React from 'react';
 import Letter from 'src/components/letter';
 import { FILL_PATTERNS } from 'src/constants';
 
-import './Word.css';
+import './style.css';
 
 type Props = {
   letters: string[],
