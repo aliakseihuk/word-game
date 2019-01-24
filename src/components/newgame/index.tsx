@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setWord } from 'src/actions';
 import Button from 'src/components/button';
-import ValidationError from 'src/components/validationError';
+import ValidationError from 'src/components/validation-error';
 import CONFIG from 'src/config';
 
 type State = {
